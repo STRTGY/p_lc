@@ -91,7 +91,7 @@ display(IsochroneLegend());
 ```
 
 <div class="note">
-**🚗 Acerca de las Isócronas HERE:** Calculadas con la API HERE, estas áreas consideran la red vial real, límites de velocidad y patrones de flujo de tráfico. Representan las zonas alcanzables en automóvil desde el sitio en los tiempos indicados.
+<strong>🚗 Acerca de las Isócronas HERE:</strong> Calculadas con la API HERE, estas áreas consideran la red vial real, límites de velocidad y patrones de flujo de tráfico. Representan las zonas alcanzables en automóvil desde el sitio en los tiempos indicados.
 </div>
 
 ---
@@ -146,7 +146,7 @@ display(IsochroneLegend());
 ```
 
 <div class="note">
-**📐 Diferencias clave:** Las isócronas HERE consideran la red vial real, mientras que los buffers euclidianos asumen distancia en línea recta. En áreas urbanas con infraestructura vial compleja, las isócronas ofrecen una representación más precisa del alcance real.
+<strong>📐 Diferencias clave:</strong> Las isócronas HERE consideran la red vial real, mientras que los buffers euclidianos asumen distancia en línea recta. En áreas urbanas con infraestructura vial compleja, las isócronas ofrecen una representación más precisa del alcance real.
 </div>
 
 ---
@@ -193,12 +193,14 @@ display(IsochroneLegend());
 ```
 
 <div class="note">
-**🔢 Cálculo de Eficiencia:** La eficiencia se calcula como (Área Isócrona / Área Buffer Equivalente) × 100. Una eficiencia del 100% significaría que el área alcanzable en tiempo real es igual a un círculo perfecto. Valores menores indican restricciones viales.
+<strong>🔢 Cálculo de Eficiencia:</strong> La eficiencia se calcula como (Área Isócrona / Área Buffer Equivalente) × 100. Una eficiencia del 100% significaría que el área alcanzable en tiempo real es igual a un círculo perfecto. Valores menores indican restricciones viales.
 
-**⚠️ Interpretación:**
-- **< 50%**: Conectividad muy limitada (alta fricción vial)
-- **50-70%**: Conectividad aceptable con restricciones
-- **> 70%**: Buena conectividad vial
+<strong>⚠️ Interpretación:</strong>
+<ul>
+<li><strong>&lt; 50%:</strong> Conectividad muy limitada (alta fricción vial)</li>
+<li><strong>50-70%:</strong> Conectividad aceptable con restricciones</li>
+<li><strong>&gt; 70%:</strong> Buena conectividad vial</li>
+</ul>
 </div>
 
 ---
@@ -250,6 +252,7 @@ display(IsochroneLegend());
 ```js
 {
   const table = Inputs.table(isocronas_data, {
+    select: false,
     columns: ["tiempo_min", "area_km2", "radio_aprox_m", "eficiencia", "area_buffer_equiv", "interpretacion"],
     header: {
       tiempo_min: "Tiempo (min)",
@@ -308,6 +311,7 @@ display(IsochroneLegend());
   ];
   
   const table = Inputs.table(implicaciones, {
+    select: false,
     width: {
       factor: 150,
       evaluacion: 200,
@@ -325,5 +329,5 @@ display(IsochroneLegend());
 
 <div class="grid grid-cols-2">
   <a href="./demanda-nse" class="card">← Anterior: Demanda y NSE</a>
-  <a href="./competencia-vocacion" class="card">Siguiente: Competencia →</a>
+  <a href="./competencia" class="card">Siguiente: Competencia →</a>
 </div>

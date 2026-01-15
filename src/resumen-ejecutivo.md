@@ -56,53 +56,53 @@ display(ROIIndicator({
 
 ## 📈 Hallazgos Clave
 
+```js
+display(html`
 <div class="grid grid-cols-2">
 
 <div class="card">
-
-### 1. Perfil de Demanda
-
-- **Población alcanzable (1km):** ${narrative.demographics.poblacion_1km.toLocaleString()} habitantes
-- **NSE predominante:** ${narrative.nse_analysis.tier_dominante} (Índice: ${narrative.nse_analysis.indice_1km.toFixed(1)})
-- **Densidad poblacional:** ${Math.round(narrative.demographics.poblacion_1km / 3.14).toLocaleString()} hab/km²
-- **Jóvenes 15-29:** ${narrative.demographics.poblacion_15_29_1km.toLocaleString()} (${((narrative.demographics.poblacion_15_29_1km / narrative.demographics.poblacion_1km) * 100).toFixed(1)}%)
-
+  <h3>1. Perfil de Demanda</h3>
+  <ul>
+    <li><strong>Población alcanzable (1km):</strong> ${narrative.demographics.poblacion_1km.toLocaleString()} habitantes</li>
+    <li><strong>NSE predominante:</strong> ${narrative.nse_analysis.tier_dominante} (Índice: ${narrative.nse_analysis.indice_1km.toFixed(1)})</li>
+    <li><strong>Densidad poblacional:</strong> ${Math.round(narrative.demographics.poblacion_1km / 3.14).toLocaleString()} hab/km²</li>
+    <li><strong>Jóvenes 15-29:</strong> ${narrative.demographics.poblacion_15_29_1km.toLocaleString()} (${((narrative.demographics.poblacion_15_29_1km / narrative.demographics.poblacion_1km) * 100).toFixed(1)}%)</li>
+  </ul>
 </div>
 
 <div class="card">
-
-### 2. Competencia y Saturación
-
-- **Establecimientos DENUE (1km):** ${establecimientos_1km.toLocaleString()} unidades
-- **Densidad comercial:** ${densidad_comercial.toLocaleString()} estab/km² (${nivel_saturacion})
-- **Restaurantes F&B:** ${restaurantes_fb} establecimientos
-- **Top competidor:** ${top_competidor.substring(0, 50)}${top_competidor.length > 50 ? '...' : ''}
-
+  <h3>2. Competencia y Saturación</h3>
+  <ul>
+    <li><strong>Establecimientos DENUE (1km):</strong> ${establecimientos_1km.toLocaleString()} unidades</li>
+    <li><strong>Densidad comercial:</strong> ${densidad_comercial.toLocaleString()} estab/km² (${nivel_saturacion})</li>
+    <li><strong>Restaurantes F&B:</strong> ${restaurantes_fb} establecimientos</li>
+    <li><strong>Top competidor:</strong> ${top_competidor.substring(0, 50)}${top_competidor.length > 50 ? '...' : ''}</li>
+  </ul>
 </div>
 
 <div class="card">
-
-### 3. Accesibilidad
-
-- **Población 15 min (auto):** ~${Math.round(narrative.connectivity.isochrones[2].area_km2 * (narrative.demographics.poblacion_1km / 3.14)).toLocaleString()} habitantes (estimado)
-- **Área alcanzable:** ${narrative.connectivity.isochrones[2].area_km2.toFixed(1)} km²
-- **Eficiencia vs buffer:** ${narrative.connectivity.isochrones[2].eficiencia}%
-- **Vialidades:** Carretera Federal, vialidades locales
-
+  <h3>3. Accesibilidad</h3>
+  <ul>
+    <li><strong>Población 15 min (auto):</strong> ~${Math.round(narrative.connectivity.isochrones[2].area_km2 * (narrative.demographics.poblacion_1km / 3.14)).toLocaleString()} habitantes (estimado)</li>
+    <li><strong>Área alcanzable:</strong> ${narrative.connectivity.isochrones[2].area_km2.toFixed(1)} km²</li>
+    <li><strong>Eficiencia vs buffer:</strong> ${narrative.connectivity.isochrones[2].eficiencia}%</li>
+    <li><strong>Vialidades:</strong> Carretera Federal, vialidades locales</li>
+  </ul>
 </div>
 
 <div class="card">
-
-### 4. Vocación de Giros Afines
-
-- **Score promedio (Top 10):** ${narrative.vocation_analysis.average_score.toFixed(2)} / 6.0
-- **Ranking Paragon:** #${narrative.vocation_analysis.ranking_among_properties} de 5 propiedades
-- **Vocación principal:** ${narrative.vocation_analysis.top_10_industries[0].nombre}
-- **Score vocación ancla:** ${narrative.vocation_analysis.restaurante_gourmet_analysis.score}
-
+  <h3>4. Vocación de Giros Afines</h3>
+  <ul>
+    <li><strong>Score promedio (Top 10):</strong> ${narrative.vocation_analysis.average_score.toFixed(2)} / 6.0</li>
+    <li><strong>Ranking Paragon:</strong> #${narrative.vocation_analysis.ranking_among_properties} de 5 propiedades</li>
+    <li><strong>Vocación principal:</strong> ${narrative.vocation_analysis.top_10_industries[0].nombre}</li>
+    <li><strong>Score vocación ancla:</strong> ${narrative.vocation_analysis.restaurante_gourmet_analysis.score}</li>
+  </ul>
 </div>
 
 </div>
+`);
+```
 
 ---
 
@@ -112,7 +112,7 @@ display(ROIIndicator({
 narrative.executive_summary.hallazgos.forEach(hallazgo => {
   display(InsightCard({
     titulo: hallazgo.titulo,
-    descripcion: `${hallazgo.descripcion}${hallazgo.implicacion ? `\n\n**→ Implicación:** ${hallazgo.implicacion}` : ''}${hallazgo.oportunidad ? `\n\n**► Oportunidad:** ${hallazgo.oportunidad}` : ''}`,
+    descripcion: `${hallazgo.descripcion}${hallazgo.implicacion ? `\n\n→ Implicación: ${hallazgo.implicacion}` : ''}${hallazgo.oportunidad ? `\n\n► Oportunidad: ${hallazgo.oportunidad}` : ''}`,
     fuente: hallazgo.fuente,
     tipo: hallazgo.tipo || "info"
   }));
@@ -136,7 +136,7 @@ narrative.executive_summary.hallazgos.forEach(hallazgo => {
     const color = r.probabilidad === 'Alta' ? 'error' : r.probabilidad === 'Media' ? 'warning' : 'success';
     display(InsightCard({
       titulo: `${i + 1}. ${r.tipo}`,
-      descripcion: `${r.descripcion}\n\n**Probabilidad:** ${r.probabilidad} | **Impacto:** ${r.impacto}`,
+      descripcion: `${r.descripcion}\n\nProbabilidad: ${r.probabilidad} | Impacto: ${r.impacto}`,
       tipo: color
     }));
   });
@@ -172,11 +172,13 @@ narrative.executive_summary.hallazgos.forEach(hallazgo => {
 
 <div class="note" style="background: #FFFBEB; border-left: 4px solid #F59E0B; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
 
-**⚠️ Supuestos clave del análisis:**
+<strong>⚠️ Supuestos clave del análisis:</strong>
 
-1. **Demanda:** NSE C se mantiene estable en el área y representa capacidad de gasto en experiencias gastronómicas premium ($250-400 MXN por persona)
-2. **Competencia:** Datos DENUE incompletos en 1km+ - se asume baja competencia directa hasta validación en campo
-3. **Perfil de consumidor:** Población local + flujo turístico regional combinados generan demanda suficiente para concepto temático-cultural
+<ol>
+<li><strong>Demanda:</strong> NSE C se mantiene estable en el área y representa capacidad de gasto en experiencias gastronómicas premium ($250-400 MXN por persona)</li>
+<li><strong>Competencia:</strong> Datos DENUE incompletos en 1km+ - se asume baja competencia directa hasta validación en campo</li>
+<li><strong>Perfil de consumidor:</strong> Población local + flujo turístico regional combinados generan demanda suficiente para concepto temático-cultural</li>
+</ol>
 
 </div>
 
@@ -194,7 +196,7 @@ display(VerdictBadge({veredicto: narrative.executive_summary.veredicto, size: "l
 
 ### Síntesis del Análisis
 
-El proyecto **Lienzo Charro en Ciudad Valles** presenta una **oportunidad condicionada** para el desarrollo de una plaza temática cultural-gastronómica. El análisis geoestadístico revela un equilibrio entre fortalezas estructurales y desafíos operativos que requieren estrategias específicas de mitigación.
+El proyecto Lienzo Charro en Ciudad Valles presenta una oportunidad condicionada para el desarrollo de una plaza temática cultural-gastronómica. El análisis geoestadístico revela un equilibrio entre fortalezas estructurales y desafíos operativos que requieren estrategias específicas de mitigación.
 
 ---
 
@@ -204,21 +206,21 @@ El proyecto **Lienzo Charro en Ciudad Valles** presenta una **oportunidad condic
 
 <div class="card" style="border-left: 4px solid #10B981;">
 
-**1. Estabilidad Socioeconómica**
+<strong>1. Estabilidad Socioeconómica</strong>
 
-El área mantiene un NSE consistente alrededor de 60.9 (segmento C) en todos los radios de análisis, con 100% de concentración C en el radio de 1km. Los componentes de bienes (96.01) y económico (78.07) son notablemente altos, indicando capacidad de consumo en productos y experiencias, aunque con brechas en infraestructura educativa y de vivienda.
+<p>El área mantiene un NSE consistente alrededor de 60.9 (segmento C) en todos los radios de análisis, con 100% de concentración C en el radio de 1km. Los componentes de bienes (96.01) y económico (78.07) son notablemente altos, indicando capacidad de consumo en productos y experiencias, aunque con brechas en infraestructura educativa y de vivienda.</p>
 
-**Implicación:** Existe poder adquisitivo para conceptos de ticket medio-alto ($250-400 MXN), pero debe equilibrarse con accesibilidad de precios.
+<p><strong>Implicación:</strong> Existe poder adquisitivo para conceptos de ticket medio-alto ($250-400 MXN), pero debe equilibrarse con accesibilidad de precios.</p>
 
 </div>
 
 <div class="card" style="border-left: 4px solid #10B981;">
 
-**2. White Space Competitivo**
+<strong>2. White Space Competitivo</strong>
 
-El análisis DENUE revela baja densidad de competencia directa para conceptos temáticos culturales y gastronomía premium. Con ${establecimientos_1km.toLocaleString()} establecimientos totales y solo ${restaurantes_fb} en F&B dentro del radio de 1km, existe espacio para diferenciación.
+<p>El análisis DENUE revela baja densidad de competencia directa para conceptos temáticos culturales y gastronomía premium. Con ${establecimientos_1km.toLocaleString()} establecimientos totales y solo ${restaurantes_fb} en F&B dentro del radio de 1km, existe espacio para diferenciación.</p>
 
-**Implicación:** Oportunidad de posicionarse como concepto único sin competencia directa inmediata.
+<p><strong>Implicación:</strong> Oportunidad de posicionarse como concepto único sin competencia directa inmediata.</p>
 
 </div>
 
@@ -232,21 +234,21 @@ El análisis DENUE revela baja densidad de competencia directa para conceptos te
 
 <div class="card" style="border-left: 4px solid #EF4444;">
 
-**1. Conectividad Limitada**
+<strong>1. Conectividad Limitada</strong>
 
-Las isócronas HERE muestran eficiencias bajas en tiempos cortos (41.2% a 5 min, 49% a 10 min), mejorando solo a 64.4% en 15 minutos. Esto posiciona al sitio más como **destino** que como comercio de paso.
+<p>Las isócronas HERE muestran eficiencias bajas en tiempos cortos (41.2% a 5 min, 49% a 10 min), mejorando solo a 64.4% en 15 minutos. Esto posiciona al sitio más como destino que como comercio de paso.</p>
 
-**Mitigación Requerida:** Estrategia de marketing regional agresiva, programación cultural consistente para generar visitas intencionales, y alianzas con tour operadores.
+<p><strong>Mitigación Requerida:</strong> Estrategia de marketing regional agresiva, programación cultural consistente para generar visitas intencionales, y alianzas con tour operadores.</p>
 
 </div>
 
 <div class="card" style="border-left: 4px solid #EF4444;">
 
-**2. Dependencia de Validación**
+<strong>2. Dependencia de Validación</strong>
 
-Los datos DENUE presentan inconsistencias en radios > 1km (valores 0 registrados), y no existe validación de campo sobre flujos turísticos reales hacia conceptos culturales en la zona.
+<p>Los datos DENUE presentan inconsistencias en radios > 1km (valores 0 registrados), y no existe validación de campo sobre flujos turísticos reales hacia conceptos culturales en la zona.</p>
 
-**Mitigación Requerida:** Query DENUE en vivo, conteos de tráfico vehicular y peatonal, estudio de patrones de consumo cultural-gastronómico mediante encuestas locales.
+<p><strong>Mitigación Requerida:</strong> Query DENUE en vivo, conteos de tráfico vehicular y peatonal, estudio de patrones de consumo cultural-gastronómico mediante encuestas locales.</p>
 
 </div>
 
@@ -264,19 +266,19 @@ display(InsightCard({
 }));
 ```
 
-**Enfoque Phased:**
+<strong>Enfoque Phased:</strong>
 
-1. **Fase 0 (Meses 0-3):** Validación y planeación
+1. <strong>Fase 0 (Meses 0-3):</strong> Validación y planeación
    - Validar datos de competencia con query DENUE en vivo
    - Estudio de flujo turístico mediante datos municipales
    - Definición de tenant mix específico y prospección de ancla gastronómica
 
-2. **Fase 1 (Meses 4-9):** Plaza temática + Ancla F&B
+2. <strong>Fase 1 (Meses 4-9):</strong> Plaza temática + Ancla F&B
    - Restaurante mexicano premium (80-120 pax)
    - 4-6 locales boutique (artesanía, cafés, retail cultural)
    - Programación cultural semanal (música, talleres, eventos)
 
-3. **Fase 2 (Meses 10-24):** Consolidación y expansión
+3. <strong>Fase 2 (Meses 10-24):</strong> Consolidación y expansión
    - Sala de eventos/museo regional
    - Ampliación de oferta gastronómica
    - Hospedaje experiencial (opcional, según demanda validada)
@@ -319,7 +321,7 @@ display(MetricCard({
 
 </div>
 
-**Nota crítica:** El ROI proyectado de 12-18% IRR asume:
+<strong>Nota crítica:</strong> El ROI proyectado de 12-18% IRR asume:
 - Validación exitosa de flujos turísticos (20-30% de demanda total)
 - Corrección de inconsistencias en datos DENUE
 - Obtención de ancla gastronómica con track record comprobado
@@ -331,21 +333,25 @@ display(MetricCard({
 
 <div class="card" style="background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%); color: white; padding: 2rem; border-radius: 8px;">
 
-**Veredicto: ${narrative.executive_summary.veredicto}**
+<strong>Veredicto: ${narrative.executive_summary.veredicto}</strong>
 
-Este proyecto **NO es un "GO" automático** debido a las brechas de información y desafíos de accesibilidad. Sin embargo, **NO es un "NO-GO"** porque los fundamentales de NSE, white space competitivo y vocación temática son sólidos.
+<p>Este proyecto NO es un "GO" automático debido a las brechas de información y desafíos de accesibilidad. Sin embargo, NO es un "NO-GO" porque los fundamentales de NSE, white space competitivo y vocación temática son sólidos.</p>
 
-**Recomendación:** Proceder con **Fase 0 de validación (3 meses, CAPEX mínimo)** antes de comprometer inversión full. Los deliverables de esta fase (query DENUE en vivo, estudio de flujo, contratos preliminares con ancla) determinarán si se avanza a GO o se pivotea el concepto.
+<p><strong>Recomendación:</strong> Proceder con Fase 0 de validación (3 meses, CAPEX mínimo) antes de comprometer inversión full. Los deliverables de esta fase (query DENUE en vivo, estudio de flujo, contratos preliminares con ancla) determinarán si se avanza a GO o se pivotea el concepto.</p>
 
-**Criterios de avance a GO:**
-1. ✓ Identificación de mínimo 50 establecimientos F&B adicionales en query DENUE en vivo (validando mercado)
-2. ✓ Conteo de tráfico vehicular > 5,000 vehículos/día en vialidad principal
-3. ✓ Compromiso formal de operador ancla con experiencia >5 años en cocina regional
-4. ✓ Validación de flujo turístico regional > 15,000 visitantes/mes hacia zona cultural
+<p><strong>Criterios de avance a GO:</strong></p>
+<ol style="margin-left: 1rem;">
+<li>✓ Identificación de mínimo 50 establecimientos F&B adicionales en query DENUE en vivo (validando mercado)</li>
+<li>✓ Conteo de tráfico vehicular > 5,000 vehículos/día en vialidad principal</li>
+<li>✓ Compromiso formal de operador ancla con experiencia >5 años en cocina regional</li>
+<li>✓ Validación de flujo turístico regional > 15,000 visitantes/mes hacia zona cultural</li>
+</ol>
 
-Si estos 4 criterios se cumplen → **GO a Fase 1**  
-Si 2-3 se cumplen → **REFINAR concepto y repetir validación**  
-Si <2 se cumplen → **NO-GO o cambio radical de concepto**
+<p style="margin-top: 1rem;">
+Si estos 4 criterios se cumplen → <strong>GO a Fase 1</strong><br/>
+Si 2-3 se cumplen → <strong>REFINAR concepto y repetir validación</strong><br/>
+Si &lt;2 se cumplen → <strong>NO-GO o cambio radical de concepto</strong>
+</p>
 
 </div>
 

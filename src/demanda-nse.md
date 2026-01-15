@@ -124,7 +124,7 @@ display(InsightCard({
 ```
 
 <div class="note">
-**💡 Insight:** El gráfico muestra la distribución de AGEBs por distancia al sitio. El tamaño de cada punto representa la población. La línea punteada azul muestra la tendencia general del NSE a medida que nos alejamos del sitio.
+<strong>💡 Insight:</strong> El gráfico muestra la distribución de AGEBs por distancia al sitio. El tamaño de cada punto representa la población. La línea punteada azul muestra la tendencia general del NSE a medida que nos alejamos del sitio.
 </div>
 
 ---
@@ -151,16 +151,16 @@ display(InsightCard({
 
 ### Análisis por Componente
 
-**🎓 Educación: ${narrative.nse_analysis.componentes.educacion.toFixed(1)}**
+<strong>🎓 Educación: ${narrative.nse_analysis.componentes.educacion.toFixed(1)}</strong><br/>
 - ${narrative.nse_analysis.componentes.educacion < 50 ? "⚠️ Por debajo del promedio nacional" : "✓ Nivel aceptable"}
 
-**🏠 Vivienda: ${narrative.nse_analysis.componentes.vivienda.toFixed(1)}**
+<strong>🏠 Vivienda: ${narrative.nse_analysis.componentes.vivienda.toFixed(1)}</strong><br/>
 - ${narrative.nse_analysis.componentes.vivienda < 50 ? "⚠️ Calidad de vivienda limitada" : "✓ Nivel aceptable"}
 
-**💰 Bienes: ${narrative.nse_analysis.componentes.bienes.toFixed(1)}**
+<strong>💰 Bienes: ${narrative.nse_analysis.componentes.bienes.toFixed(1)}</strong><br/>
 - ${narrative.nse_analysis.componentes.bienes > 70 ? "✓ Alta posesión de activos" : "→ Nivel medio"}
 
-**📊 Económico: ${narrative.nse_analysis.componentes.economico.toFixed(1)}**
+<strong>📊 Económico: ${narrative.nse_analysis.componentes.economico.toFixed(1)}</strong><br/>
 - ${narrative.nse_analysis.componentes.economico > 70 ? "✓ Buena capacidad de consumo" : "→ Nivel medio"}
 
 </div>
@@ -287,7 +287,7 @@ display(InsightCard({
 ```
 
 <div class="note">
-**📍 Nota:** Los círculos punteados representan los radios de análisis (250m, 500m, 1km), y el punto rojo marca la ubicación exacta del sitio.
+<strong>📍 Nota:</strong> Los círculos punteados representan los radios de análisis (250m, 500m, 1km), y el punto rojo marca la ubicación exacta del sitio.
 </div>
 
 ---
@@ -297,6 +297,7 @@ display(InsightCard({
 ```js
 {
   const table = Inputs.table(indicadores, {
+    select: false,
     columns: ["radio_display", "nse_index", "poblacion_total", "densidad_pob", "area_km2", "nse_dominante"],
     header: {
       radio_display: "Radio",

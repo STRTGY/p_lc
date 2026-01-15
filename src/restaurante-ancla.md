@@ -18,9 +18,12 @@ const buffers = await FileAttachment("./data/layers/02_lienzo_charro_buffers_ana
 
 const denue_procesado = processDENUEAgrupado(denue_json);
 
-// Calcular población 10 min (usando densidad real del área de 1km)
-const densidad_real_zona = narrative.demographics.poblacion_1km / 3.14; // Población 1km ÷ área círculo 1km
-const pob_10min = Math.round(narrative.connectivity.isochrones[1].area_km2 * densidad_real_zona);
+// Calcular población 10 min (interpolación entre radios conocidos)
+// Isócrona 10min tiene radio ~3.5km, usar interpolación entre poblacion_2km y poblacion_5km
+const pob_2km = narrative.demographics.poblacion_2km || 48837;
+const pob_5km = narrative.demographics.poblacion_5km || 117844;
+const radio_10min_km = narrative.connectivity.isochrones[1].radio_aprox_m / 1000; // ~3.5km
+const pob_10min = Math.round(pob_2km + (pob_5km - pob_2km) * (radio_10min_km - 2) / (5 - 2));
 const hogares = Math.round(pob_10min / 4);
 const pct_c_plus = narrative.nse_analysis.share_c_plus_1km + narrative.nse_analysis.share_ab_1km;
 
@@ -55,29 +58,45 @@ const m2_recomendados = Math.round(capacidad_asientos * 1.8);
 // Competencia F&B
 const restaurantes = denue_json.features.filter(e => e.properties.codigo_act?.startsWith('722'));
 
-const cocina_regional = restaurantes.filter(e => 
-  e.properties.nombre_act?.toLowerCase().includes('mexicana') ||
-  e.properties.nombre_act?.toLowerCase().includes('regional') ||
-  e.properties.nombre_act?.toLowerCase().includes('típica')
-);
+// Cocina regional: buscar por nombre de establecimiento Y descripción SCIAN
+const cocina_regional = restaurantes.filter(e => {
+  const nombre = e.properties.nom_estab?.toLowerCase() || '';
+  const actividad = e.properties.nombre_act?.toLowerCase() || '';
+  return nombre.includes('mexicana') || nombre.includes('regional') || 
+         nombre.includes('típica') || nombre.includes('tipica') ||
+         nombre.includes('huastec') || nombre.includes('potosina') ||
+         nombre.includes('antojitos') || nombre.includes('pozole') ||
+         nombre.includes('enchilada') || nombre.includes('mole') ||
+         actividad.includes('mexicana') || actividad.includes('regional');
+});
 
+// Comida rápida: por nombre y actividad
+const rapida = restaurantes.filter(e => {
+  const nombre = e.properties.nom_estab?.toLowerCase() || '';
+  const actividad = e.properties.nombre_act?.toLowerCase() || '';
+  return actividad.includes('rápida') || actividad.includes('rapida') ||
+         nombre.includes('tacos') || nombre.includes('tortas') ||
+         nombre.includes('hamburguesa') || nombre.includes('burger') ||
+         nombre.includes('pizza') || nombre.includes('hot dog') ||
+         nombre.includes('pollo frito') || nombre.includes('carnitas');
+});
+
+// Cafeterías: por nombre y actividad
+const cafeterias = restaurantes.filter(e => {
+  const nombre = e.properties.nom_estab?.toLowerCase() || '';
+  const actividad = e.properties.nombre_act?.toLowerCase() || '';
+  return actividad.includes('cafetería') || actividad.includes('cafeteria') ||
+         actividad.includes('café') || actividad.includes('cafe') ||
+         nombre.includes('café') || nombre.includes('cafe') ||
+         nombre.includes('coffee') || nombre.includes('starbucks');
+});
+
+// Casuales: resto de restaurantes que no son regional, rápida ni café
+const cocina_regional_set = new Set(cocina_regional);
+const rapida_set = new Set(rapida);
+const cafeterias_set = new Set(cafeterias);
 const casuales = restaurantes.filter(e => 
-  !e.properties.nombre_act?.toLowerCase().includes('rápida') &&
-  !e.properties.nombre_act?.toLowerCase().includes('cafetería') &&
-  !e.properties.nombre_act?.toLowerCase().includes('mexicana') &&
-  !e.properties.nombre_act?.toLowerCase().includes('regional')
-);
-
-const rapida = restaurantes.filter(e => 
-  e.properties.nombre_act?.toLowerCase().includes('rápida') ||
-  e.properties.nombre_act?.toLowerCase().includes('tortas') ||
-  e.properties.nombre_act?.toLowerCase().includes('tacos') ||
-  e.properties.nombre_act?.toLowerCase().includes('hamburguesa')
-);
-
-const cafeterias = restaurantes.filter(e => 
-  e.properties.nombre_act?.toLowerCase().includes('cafetería') ||
-  e.properties.nombre_act?.toLowerCase().includes('café')
+  !cocina_regional_set.has(e) && !rapida_set.has(e) && !cafeterias_set.has(e)
 );
 
 // Veredicto basado en scores
@@ -205,6 +224,7 @@ display(InsightCard({
   ];
   
   const table = Inputs.table(competencia_fb, {
+    select: false,
     columns: ["tipo", "cantidad", "ticket_promedio", "similitud"],
     header: {
       tipo: "Tipo",
@@ -260,84 +280,175 @@ display(InsightCard({
 ```
 
 <div class="note">
-**🍽️ Análisis visual:** El mapa muestra todos los establecimientos F&B (SCIAN 722) en el área. Observa la distribución espacial para identificar clusters de competencia y white spaces geográficos donde el concepto podría tener ventaja.
+<strong>🍽️ Análisis visual:</strong> El mapa muestra todos los establecimientos F&B (SCIAN 722) en el área. Observa la distribución espacial para identificar clusters de competencia y white spaces geográficos donde el concepto podría tener ventaja.
 </div>
 
 ---
 
 ## 💰 Viabilidad Financiera Preliminar
 
-<div class="grid grid-cols-2">
+### Métricas Clave de Operación
 
-<div class="card">
+<div class="grid grid-cols-4">
 
-### Ingresos Estimados
+```js
+display(MetricCard({
+  label: "Venta Anual Estimada",
+  value: `$${(venta_anual / 1000000).toFixed(1)}M`,
+  subtitle: `$${(venta_mensual / 1000).toFixed(0)}k MXN/mes`,
+  color: "green",
+  icon: "💰"
+}));
+```
 
-| Métrica | Valor |
-|---------|-------|
-| **Comensales/día:** | ${comensales_dia} personas |
-| **Ticket promedio:** | $${ticket_objetivo} MXN |
-| **Venta diaria:** | $${venta_diaria.toLocaleString()} MXN |
-| **Venta mensual:** | $${venta_mensual.toLocaleString()} MXN |
-| **Venta anual:** | $${venta_anual.toLocaleString()} MXN |
+```js
+display(MetricCard({
+  label: "Comensales/Día",
+  value: comensales_dia.toString(),
+  subtitle: `${capacidad_asientos} asientos × ${rotacion_dia} turnos × ${(ocupacion_promedio * 100).toFixed(0)}%`,
+  color: "blue",
+  icon: "👥"
+}));
+```
 
-**Supuestos:** ${capacidad_asientos} asientos, ${rotacion_dia} rotaciones/día, ${(ocupacion_promedio * 100).toFixed(0)}% ocupación promedio, ${dias_operacion_mes} días/mes.
+```js
+display(MetricCard({
+  label: "Punto de Equilibrio",
+  value: `${punto_equilibrio_dia}`,
+  subtitle: "comensales/día mínimo",
+  color: punto_equilibrio_dia < comensales_dia * 0.7 ? "green" : "orange",
+  icon: "⚖️"
+}));
+```
+
+```js
+display(MetricCard({
+  label: "Margen Operativo",
+  value: `${(margen_operativo * 100).toFixed(0)}%`,
+  subtitle: "Benchmark: 15-25%",
+  color: "purple",
+  icon: "📊"
+}));
+```
 
 </div>
 
-<div class="card">
+### Modelo de Ingresos
 
-### Indicadores Clave
+<div class="grid grid-cols-4">
 
-| Métrica | Valor |
-|---------|-------|
-| **Rentabilidad esperada:** | ${(margen_operativo * 100).toFixed(0)}% |
-| **Punto de equilibrio:** | ${punto_equilibrio_dia} comensales/día |
-| **Capacidad sugerida:** | ${capacidad_asientos} personas |
-| **M² recomendados:** | ${m2_recomendados} m² |
+```js
+display(MetricCard({
+  label: "Ticket Promedio",
+  value: `$${ticket_objetivo}`,
+  subtitle: "MXN por persona",
+  color: "gray",
+  icon: "🎫"
+}));
+```
 
-**Benchmark industria:** Margen operativo 15-25%, costo alimentos 28-32%, nómina 22-28%, renta y otros 20-28%.
+```js
+display(MetricCard({
+  label: "Venta Diaria",
+  value: `$${(venta_diaria/1000).toFixed(0)}k`,
+  subtitle: `${comensales_dia} comensales × $${ticket_objetivo}`,
+  color: "gray",
+  icon: "📅"
+}));
+```
+
+```js
+display(MetricCard({
+  label: "Días Operación",
+  value: `${dias_operacion_mes}`,
+  subtitle: "días por mes",
+  color: "gray",
+  icon: "🗓️"
+}));
+```
+
+```js
+display(MetricCard({
+  label: "Venta Mensual",
+  value: `$${(venta_mensual/1000).toFixed(0)}k`,
+  subtitle: "MXN proyectado",
+  color: "green",
+  icon: "📈"
+}));
+```
 
 </div>
 
-</div>
+### Curva de Ramp-Up (12 meses)
 
 ```js
 {
-  // Gráfico de proyección de ventas
+  // Gráfico de proyección mejorado
   const proyeccion = [
-    {mes: "Mes 1", venta: venta_mensual * 0.4, ocupacion: 0.40},
-    {mes: "Mes 3", venta: venta_mensual * 0.55, ocupacion: 0.55},
-    {mes: "Mes 6", venta: venta_mensual * 0.70, ocupacion: 0.70},
-    {mes: "Mes 9", venta: venta_mensual * 0.80, ocupacion: 0.80},
-    {mes: "Mes 12", venta: venta_mensual * 0.85, ocupacion: 0.85},
-    {mes: "Estable", venta: venta_mensual, ocupacion: 1.0}
+    {mes: "M1", mesNum: 1, venta: venta_mensual * 0.40, ocupacion: 40, estado: "Apertura"},
+    {mes: "M3", mesNum: 3, venta: venta_mensual * 0.55, ocupacion: 55, estado: "Crecimiento"},
+    {mes: "M6", mesNum: 6, venta: venta_mensual * 0.70, ocupacion: 70, estado: "Crecimiento"},
+    {mes: "M9", mesNum: 9, venta: venta_mensual * 0.80, ocupacion: 80, estado: "Maduración"},
+    {mes: "M12", mesNum: 12, venta: venta_mensual * 0.85, ocupacion: 85, estado: "Estable"},
+    {mes: "M18+", mesNum: 18, venta: venta_mensual * 1.0, ocupacion: 100, estado: "Objetivo"}
   ];
   
+  const puntoEquilibrio = punto_equilibrio_dia * ticket_objetivo * dias_operacion_mes;
+  
   const chart = Plot.plot({
-    height: 300,
-    y: {label: "↑ Venta Mensual (MXN)", grid: true},
+    height: 320,
+    marginLeft: 80,
+    marginRight: 40,
+    marginBottom: 50,
+    style: {
+      background: "#fafafa",
+      fontSize: "12px"
+    },
+    x: {
+      label: "Periodo →",
+      tickFormat: d => d,
+      domain: proyeccion.map(d => d.mes)
+    },
+    y: {
+      label: "↑ Venta Mensual (MXN)",
+      grid: true,
+      tickFormat: d => `$${(d/1000).toFixed(0)}k`,
+      domain: [0, venta_mensual * 1.15]
+    },
     marks: [
-      Plot.areaY(proyeccion, {
+      // Línea de punto de equilibrio
+      Plot.ruleY([puntoEquilibrio], {
+        stroke: "#EF4444",
+        strokeWidth: 2,
+        strokeDasharray: "6,4"
+      }),
+      // Etiqueta punto equilibrio
+      Plot.text([{x: "M18+", y: puntoEquilibrio}], {
+        x: "x",
+        y: "y",
+        text: ["← Punto Equilibrio"],
+        textAnchor: "end",
+        dx: -10,
+        fill: "#EF4444",
+        fontWeight: "600",
+        fontSize: 11
+      }),
+      // Barras de venta
+      Plot.barY(proyeccion, {
         x: "mes",
         y: "venta",
-        fill: "#10B981",
-        fillOpacity: 0.2
+        fill: d => d.venta >= puntoEquilibrio ? "#10B981" : "#F59E0B",
+        rx: 4
       }),
-      Plot.lineY(proyeccion, {
-        x: "mes",
-        y: "venta",
-        stroke: "#10B981",
-        strokeWidth: 3,
-        marker: "circle"
-      }),
+      // Etiquetas de ocupación
       Plot.text(proyeccion, {
         x: "mes",
         y: "venta",
-        text: d => `${(d.ocupacion * 100).toFixed(0)}%`,
-        dy: -10,
+        text: d => `${d.ocupacion}%`,
+        dy: -12,
         fill: "#1F2937",
-        fontSize: 11
+        fontWeight: "600",
+        fontSize: 12
       })
     ]
   });
@@ -346,8 +457,45 @@ display(InsightCard({
 }
 ```
 
-<div class="note">
-**📈 Curva de Ramp-Up:** La proyección asume una ocupación gradual desde 40% en el mes 1 hasta estabilización en 85-100% al año. Los porcentajes mostrados indican el nivel de ocupación esperado.
+<div class="note" style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+  <span>🟩 Sobre punto de equilibrio</span>
+  <span>🟨 Bajo punto de equilibrio</span>
+  <span>🔴 Línea = Punto de equilibrio</span>
+</div>
+
+### Supuestos del Modelo
+
+<div class="grid grid-cols-2">
+
+<div class="card">
+
+#### 📐 Capacidad Operativa
+
+```js
+display(html`
+<ul>
+  <li><strong>${capacidad_asientos}</strong> asientos de capacidad</li>
+  <li><strong>${rotacion_dia}</strong> rotaciones/día (almuerzo + cena)</li>
+  <li><strong>${(ocupacion_promedio * 100).toFixed(0)}%</strong> ocupación promedio objetivo</li>
+  <li><strong>${dias_operacion_mes}</strong> días de operación/mes</li>
+  <li><strong>${m2_recomendados} m²</strong> espacio recomendado</li>
+</ul>
+`);
+```
+
+</div>
+
+<div class="card">
+
+#### 💵 Benchmarks Industria
+
+- Margen operativo: **15-25%**
+- Costo de alimentos: **28-32%**
+- Nómina: **22-28%**
+- Renta y otros: **20-28%**
+
+</div>
+
 </div>
 
 ---
@@ -416,22 +564,22 @@ display(InsightCard({
 
 ### 🟢 Mitigantes
 
-1. **Diferenciación clara:** Posicionamiento como "experiencia cultural-gastronómica" vs restaurante tradicional
+1. <strong>Diferenciación clara:</strong> Posicionamiento como "experiencia cultural-gastronómica" vs restaurante tradicional
    - Escenografía temática consistente
    - Programación cultural (música en vivo, talleres)
    - Menú storytelling (historia de cada platillo)
 
-2. **Flexibilidad de precios:** Menú con rango $180-600 MXN
+2. <strong>Flexibilidad de precios:</strong> Menú con rango $180-600 MXN
    - Platillos entrada: $180-250
    - Platillos fuertes: $280-400
    - Experiencias premium: $450-600
 
-3. **Marketing regional:** Radio 50km, no solo local
+3. <strong>Marketing regional:</strong> Radio 50km, no solo local
    - Alianzas con hoteles y tour operadores
    - Presencia en guías gastronómicas regionales
    - Redes sociales enfocadas en turismo cultural
 
-4. **Due diligence de operador:**
+4. <strong>Due diligence de operador:</strong>
    - Mínimo 5 años experiencia en cocina regional
    - Referencias de restaurantes previos
    - Capacidad financiera demostrada
@@ -465,7 +613,7 @@ display(InsightCard({
 ```js
 display(InsightCard({
   titulo: "Evaluación Integral",
-  descripcion: `El restaurante ancla de cocina regional obtiene un score de **${score_total}/8 puntos** en la evaluación de viabilidad:\n\n• Demanda (${score_demanda}/2): ${pob_10min.toLocaleString()} hab en 10 min ${pob_10min > 20000 ? '✓' : '⚠️'}\n• Competencia (${score_competencia}/2): ${cocina_regional.length} competidores directos ${cocina_regional.length < 5 ? '✓' : '⚠️'}\n• NSE (${score_nse}/2): Índice ${narrative.nse_analysis.indice_1km.toFixed(1)} ${narrative.nse_analysis.indice_1km > 60 ? '✓' : '⚠️'}\n• Accesibilidad (${score_accesibilidad}/2): Eficiencia ${narrative.connectivity.isochrones[1].eficiencia}% ${narrative.connectivity.isochrones[1].eficiencia > 50 ? '✓' : '⚠️'}`,
+  descripcion: `El restaurante ancla de cocina regional obtiene un score de ${score_total}/8 puntos en la evaluación de viabilidad:\n\n• Demanda (${score_demanda}/2): ${pob_10min.toLocaleString()} hab en 10 min ${pob_10min > 20000 ? '✓' : '⚠️'}\n• Competencia (${score_competencia}/2): ${cocina_regional.length} competidores directos ${cocina_regional.length < 5 ? '✓' : '⚠️'}\n• NSE (${score_nse}/2): Índice ${narrative.nse_analysis.indice_1km.toFixed(1)} ${narrative.nse_analysis.indice_1km > 60 ? '✓' : '⚠️'}\n• Accesibilidad (${score_accesibilidad}/2): Eficiencia ${narrative.connectivity.isochrones[1].eficiencia}% ${narrative.connectivity.isochrones[1].eficiencia > 50 ? '✓' : '⚠️'}`,
   tipo: veredicto_color
 }));
 ```
@@ -498,6 +646,7 @@ display(InsightCard({
   ];
   
   const table = Inputs.table(condiciones_go, {
+    select: false,
     columns: ["condicion", "detalle", "status"],
     header: {
       condicion: "Condición Crítica",
@@ -519,22 +668,46 @@ display(InsightCard({
 
 ### 💼 Recomendación Ejecutiva
 
-<div class="card" style="background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%); color: white; padding: 2rem; border-radius: 8px;">
-
-**${veredicto === "GO" ? "✅ Proceder con el ancla gastronómica" : veredicto === "REFINAR" ? "⚠️ Refinar concepto antes de comprometer" : "🔴 No viable como planteado"}**
-
-${veredicto === "GO" ? 
-  `El análisis sugiere viabilidad del restaurante ancla. Proceder con prospección de operadores y negociación de términos. Priorizar operador con experiencia comprobada en cocina regional premium y capacidad de ejecución del concepto temático.` : 
-  veredicto === "REFINAR" ? 
-    `El concepto requiere ajustes antes de comprometer inversión. **Opciones de refinamiento:**\n\n1. **Reducir ticket promedio** a $250-280 para ampliar mercado objetivo\n2. **Validar con pop-up temporal** (3 meses) para testear demanda real\n3. **Formato híbrido:** Restaurante + delivery/catering para diversificar ingresos\n4. **Considerar co-ancla:** Restaurante + galería artesanal como concepto dual\n\nRevisar estas opciones en Fase 0 y repetir análisis de viabilidad.` :
-    `El concepto no es viable como planteado. Considerar:\n\n1. Cambiar a **food court multi-operador** con menor riesgo\n2. Reducir dependencia de ancla gastronómica única\n3. Enfocar en **retail experiencial** + F&B complementario\n4. Reevaluar ubicación o concepto fundamental`
+```js
+{
+  const titulo = veredicto === "GO" ? "✅ Proceder con el ancla gastronómica" : 
+                 veredicto === "REFINAR" ? "⚠️ Refinar concepto antes de comprometer" : 
+                 "🔴 No viable como planteado";
+  
+  let contenido;
+  if (veredicto === "GO") {
+    contenido = "El análisis sugiere viabilidad del restaurante ancla. Proceder con prospección de operadores y negociación de términos. Priorizar operador con experiencia comprobada en cocina regional premium y capacidad de ejecución del concepto temático.";
+  } else if (veredicto === "REFINAR") {
+    contenido = `El concepto requiere ajustes antes de comprometer inversión. Opciones de refinamiento:
+      <ol>
+        <li>Reducir ticket promedio a $250-280 para ampliar mercado objetivo</li>
+        <li>Validar con pop-up temporal (3 meses) para testear demanda real</li>
+        <li>Formato híbrido: Restaurante + delivery/catering para diversificar ingresos</li>
+        <li>Considerar co-ancla: Restaurante + galería artesanal como concepto dual</li>
+      </ol>
+      Revisar estas opciones en Fase 0 y repetir análisis de viabilidad.`;
+  } else {
+    contenido = `El concepto no es viable como planteado. Considerar:
+      <ol>
+        <li>Cambiar a food court multi-operador con menor riesgo</li>
+        <li>Reducir dependencia de ancla gastronómica única</li>
+        <li>Enfocar en retail experiencial + F&B complementario</li>
+        <li>Reevaluar ubicación o concepto fundamental</li>
+      </ol>`;
+  }
+  
+  display(html`
+    <div class="card" style="background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%); color: white; padding: 2rem; border-radius: 8px;">
+      <strong>${titulo}</strong>
+      <p style="margin-top: 1rem;">${contenido}</p>
+    </div>
+  `);
 }
-
-</div>
+```
 
 ---
 
 <div class="note">
-**📋 Disclaimer:** Esta es una evaluación preliminar basada en datos geoestadísticos. Se requiere estudio de factibilidad financiera completo (pro-forma 5 años, análisis de sensibilidad, TIR/VPN) y validación con operadores especializados antes de comprometer CAPEX.
+<strong>📋 Disclaimer:</strong> Esta es una evaluación preliminar basada en datos geoestadísticos. Se requiere estudio de factibilidad financiera completo (pro-forma 5 años, análisis de sensibilidad, TIR/VPN) y validación con operadores especializados antes de comprometer CAPEX.
 </div>
 

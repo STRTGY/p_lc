@@ -110,12 +110,13 @@ display(InsightCard({
 ```
 
 <div class="note">
-**📊 Código de colores del Score:**
-- 🟢 Verde (> 5.2): Vocación excelente, aprovechar
-- 🔵 Azul (4.8-5.2): Vocación alta, considerarfuertemente
-- 🟡 Amarillo (4.4-4.8): Vocación moderada, analizar caso por caso
-- 🔴 Rojo (< 4.4): Vocación baja, evitar
-
+<strong>📊 Código de colores del Score:</strong>
+<ul>
+<li>🟢 Verde (&gt; 5.2): Vocación excelente, aprovechar</li>
+<li>🔵 Azul (4.8-5.2): Vocación alta, considerar fuertemente</li>
+<li>🟡 Amarillo (4.4-4.8): Vocación moderada, analizar caso por caso</li>
+<li>🔴 Rojo (&lt; 4.4): Vocación baja, evitar</li>
+</ul>
 El score de vocación combina múltiples factores: demanda (NSE, población, poder adquisitivo), oferta (competencia, saturación), accesibilidad (isócronas, conectividad) y condiciones del sitio (visibilidad, flujo vehicular).
 </div>
 
@@ -126,7 +127,7 @@ El score de vocación combina múltiples factores: demanda (NSE, población, pod
 ```js
 display(InsightCard({
   titulo: `Restaurante Gourmet - Score: ${narrative.vocation_analysis.restaurante_gourmet_analysis.score}`,
-  descripcion: `**Drivers:** ${narrative.vocation_analysis.restaurante_gourmet_analysis.drivers}\n\n**Limitantes:** ${narrative.vocation_analysis.restaurante_gourmet_analysis.limitantes}\n\n**Estrategia:** ${narrative.vocation_analysis.restaurante_gourmet_analysis.estrategia}`,
+  descripcion: `Drivers: ${narrative.vocation_analysis.restaurante_gourmet_analysis.drivers}\n\nLimitantes: ${narrative.vocation_analysis.restaurante_gourmet_analysis.limitantes}\n\nEstrategia: ${narrative.vocation_analysis.restaurante_gourmet_analysis.estrategia}`,
   tipo: "info"
 }));
 ```
@@ -142,6 +143,7 @@ display(InsightCard({
   const tenantMix = narrative.tenant_mix.propuesta;
   
   const table = Inputs.table(tenantMix, {
+    select: false,
     columns: ["giro", "gla_m2", "rol", "cantidad", "descripcion"],
     header: {
       giro: "Giro / Concepto",
@@ -197,6 +199,7 @@ ${narrative.tenant_mix.diferenciacion.map(d => `- ${d}`).join('\n')}
   ];
   
   const table = Inputs.table(recomendaciones, {
+    select: false,
     columns: ["categoria", "recomendacion", "prioridad"],
     header: {
       categoria: "Categoría",
@@ -218,7 +221,7 @@ display(RiskMatrix(narrative.risks));
 ```
 
 <div class="note">
-**📋 Mitigación de Riesgos:** La matriz muestra riesgos identificados por probabilidad e impacto. Para cada riesgo alto (rojo), se han definido estrategias específicas de mitigación en el roadmap de implementación.
+<strong>📋 Mitigación de Riesgos:</strong> La matriz muestra riesgos identificados por probabilidad e impacto. Para cada riesgo alto (rojo), se han definido estrategias específicas de mitigación en el roadmap de implementación.
 </div>
 
 ---
@@ -266,6 +269,7 @@ ${narrative.roadmap.fase_2.acciones.map(a => `- ${a}`).join('\n')}
 ```js
 {
   const table = Inputs.table(narrative.next_steps_30_days, {
+    select: false,
     columns: ["accion", "responsable", "entregable"],
     header: {
       accion: "Acción",

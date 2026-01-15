@@ -193,6 +193,7 @@ narrative.executive_summary.hallazgos.forEach(hallazgo => {
   const tenantMix = narrative.tenant_mix.propuesta;
   
   const table = Inputs.table(tenantMix, {
+    select: false,
     columns: ["giro", "gla_m2", "rol", "cantidad"],
     header: {
       giro: "Giro / Concepto",
@@ -209,15 +210,22 @@ narrative.executive_summary.hallazgos.forEach(hallazgo => {
   });
   
   display(table);
+  
+  // Mix de Uso
+  display(html`
+    <div style="margin-top: 1.5rem;">
+      <strong>Mix de Uso:</strong>
+      <ul style="list-style: none; padding-left: 0; margin-top: 0.5rem;">
+        <li>🍽️ <strong>Gastronomía:</strong> ${narrative.tenant_mix.mix_porcentajes.gastronomia}%</li>
+        <li>🛍️ <strong>Retail Artesanal:</strong> ${narrative.tenant_mix.mix_porcentajes.retail_artesanal}%</li>
+        <li>🎭 <strong>Eventos/Cultural:</strong> ${narrative.tenant_mix.mix_porcentajes.eventos_cultural}%</li>
+        <li>💼 <strong>Servicios:</strong> ${narrative.tenant_mix.mix_porcentajes.servicios}%</li>
+        <li>🔧 <strong>Back of House:</strong> ${narrative.tenant_mix.mix_porcentajes.back_of_house}%</li>
+      </ul>
+    </div>
+  `);
 }
 ```
-
-**Mix de Uso:**
-- 🍽️ **Gastronomía**: ${narrative.tenant_mix.mix_porcentajes.gastronomia}%
-- 🛍️ **Retail Artesanal**: ${narrative.tenant_mix.mix_porcentajes.retail_artesanal}%
-- 🎭 **Eventos/Cultural**: ${narrative.tenant_mix.mix_porcentajes.eventos_cultural}%
-- 💼 **Servicios**: ${narrative.tenant_mix.mix_porcentajes.servicios}%
-- 🔧 **Back of House**: ${narrative.tenant_mix.mix_porcentajes.back_of_house}%
 
 </div>
 
@@ -239,8 +247,16 @@ narrative.executive_summary.hallazgos.forEach(hallazgo => {
     <p>Isócronas HERE y análisis de eficiencia</p>
   </div>
   <div class="card">
-    <h3><a href="./competencia-vocacion">Competencia y Vocación</a></h3>
+    <h3><a href="./competencia">Competencia</a></h3>
     <p>Análisis DENUE y heatmap de competencia</p>
+  </div>
+  <div class="card">
+    <h3><a href="./vocacion">Vocación y Tenant Mix</a></h3>
+    <p>Scores de vocación y mix propuesto</p>
+  </div>
+  <div class="card">
+    <h3><a href="./restaurante-ancla">Restaurante Ancla</a></h3>
+    <p>Viabilidad del concepto gastronómico</p>
   </div>
 </div>
 

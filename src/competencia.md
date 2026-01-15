@@ -120,12 +120,14 @@ display(InsightCard({
 ```
 
 <div class="note">
-**📈 Interpretación:** Las actividades más frecuentes indican el perfil económico del área. Alta concentración en ciertas categorías puede señalar saturación, mientras que baja presencia puede indicar oportunidades de white space.
+<strong>📈 Interpretación:</strong> Las actividades más frecuentes indican el perfil económico del área. Alta concentración en ciertas categorías puede señalar saturación, mientras que baja presencia puede indicar oportunidades de white space.
 
-**Código de colores:**
-- 🟢 Verde: < 50 establecimientos (oportunidad)
-- 🟡 Amarillo: 50-100 establecimientos (mercado competido)
-- 🔴 Rojo: > 100 establecimientos (alta saturación)
+<strong>Código de colores:</strong>
+<ul>
+<li>🟢 Verde: &lt; 50 establecimientos (oportunidad)</li>
+<li>🟡 Amarillo: 50-100 establecimientos (mercado competido)</li>
+<li>🔴 Rojo: &gt; 100 establecimientos (alta saturación)</li>
+</ul>
 </div>
 
 ---
@@ -177,13 +179,6 @@ display(InsightCard({
         y: "densidad",
         fill: "#8B5CF6"
       }),
-      Plot.line(densidad_radial, {
-        x: "radio",
-        y: "densidad",
-        stroke: "#1F2937",
-        strokeWidth: 2,
-        marker: "circle"
-      }),
       Plot.text(densidad_radial, {
         x: "radio",
         y: "densidad",
@@ -200,7 +195,7 @@ display(InsightCard({
 ```
 
 <div class="note">
-**🎯 Análisis de Densidad:** La densidad de establecimientos por km² nos indica qué tan competido está el espacio comercial en cada radio. Una densidad decreciente sugiere menor competencia conforme nos alejamos del sitio.
+<strong>🎯 Análisis de Densidad:</strong> La densidad de establecimientos por km² nos indica qué tan competido está el espacio comercial en cada radio. Una densidad decreciente sugiere menor competencia conforme nos alejamos del sitio.
 </div>
 
 ---
@@ -225,7 +220,7 @@ display(InsightCard({
 ```
 
 <div class="note">
-**💼 Establecimientos DENUE:** Cada punto morado representa un establecimiento económico registrado en el Directorio Estadístico Nacional de Unidades Económicas (DENUE) del INEGI. Haz clic en cualquier punto para ver detalles del establecimiento.
+<strong>💼 Establecimientos DENUE:</strong> Cada punto morado representa un establecimiento económico registrado en el Directorio Estadístico Nacional de Unidades Económicas (DENUE) del INEGI. Haz clic en cualquier punto para ver detalles del establecimiento.
 </div>
 
 ---
@@ -254,7 +249,7 @@ display(CompetitionDensityLegend());
 ```
 
 <div class="note">
-**💡 Interpretación:** Las áreas verdes (baja densidad) representan "white spaces" con menor competencia directa, mientras que las rojas indican saturación de mercado. Busca oportunidades en zonas amarillas o verdes cerca de vialidades principales.
+<strong>💡 Interpretación:</strong> El área de análisis muestra predominantemente densidad Media (amarillo) y Alta/Muy Alta (naranja/rojo), indicando actividad comercial establecida. Las zonas sin color o con menor intensidad representan oportunidades de menor competencia directa.
 </div>
 
 ---

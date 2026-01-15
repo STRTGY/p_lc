@@ -4,7 +4,20 @@ title: Anexos y Descargas
 
 # Anexos y Descargas
 
-Documentación técnica, capas GeoJSON, metodología y comandos de regeneración.
+```js
+// Cargar archivos GeoJSON
+const sitio = FileAttachment("./data/layers/01_lienzo_charro_sitio_terreno.geojson");
+const buffers = FileAttachment("./data/layers/02_lienzo_charro_buffers_analisis.geojson");
+const agebs = FileAttachment("./data/layers/03_lienzo_charro_agebs_nse.geojson");
+const indicadores = FileAttachment("./data/layers/06_lienzo_charro_indicadores_buffer.geojson");
+const poligono = FileAttachment("./data/layers/07_lienzo_charro_poligono_terreno.geojson");
+const isocronas = FileAttachment("./data/layers/08_lienzo_charro_isocronas_here.geojson");
+const denue = FileAttachment("./data/layers/09_lienzo_charro_denue_completo.geojson");
+const heatmap = FileAttachment("./data/layers/10_lienzo_charro_heatmap_competencia.geojson");
+const nse_comp = FileAttachment("./data/layers/12_lienzo_charro_nse_componentes.geojson");
+```
+
+Documentación técnica, capas GeoJSON, metodología y datos del análisis.
 
 ---
 
@@ -12,109 +25,139 @@ Documentación técnica, capas GeoJSON, metodología y comandos de regeneración
 
 <div class="card">
   <h2>Capas Geoestadísticas Disponibles</h2>
-  <p>Todas las capas están en formato <strong>GeoJSON + estilos QML</strong> para uso en QGIS 3.28 o superior.</p>
-  <p><strong>Directorio:</strong> <code>data/qgis_layers_paragon/lienzo_charro/</code></p>
+  <p>Todas las capas están en formato <strong>GeoJSON</strong> para uso en QGIS 3.28+, ArcGIS, o cualquier herramienta GIS.</p>
 </div>
 
 ### Capas Principales
 
-<table>
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Capa</th>
-      <th>Descripción</th>
-      <th>Features</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>01</td>
-      <td><code>01_lienzo_charro_sitio_terreno.geojson</code></td>
-      <td>Punto de ubicación del terreno</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>02</td>
-      <td><code>02_lienzo_charro_buffers_analisis.geojson</code></td>
-      <td>Buffers de análisis (100m - 5km)</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <td>03</td>
-      <td><code>03_lienzo_charro_agebs_nse.geojson</code></td>
-      <td>AGEBs con NSE (5km radio)</td>
-      <td>105</td>
-    </tr>
-    <tr>
-      <td>06</td>
-      <td><code>06_lienzo_charro_indicadores_buffer.geojson</code></td>
-      <td>Indicadores demográficos por buffer</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <td>07</td>
-      <td><code>07_lienzo_charro_poligono_terreno.geojson</code></td>
-      <td>Polígono del terreno (KMZ)</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>08</td>
-      <td><code>08_lienzo_charro_isocronas_here.geojson</code></td>
-      <td>Isócronas HERE (5/10/15 min)</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <td>09</td>
-      <td><code>09_lienzo_charro_denue_completo.geojson</code></td>
-      <td>DENUE completo (SCIAN repository)</td>
-      <td>Variable</td>
-    </tr>
-    <tr>
-      <td>10</td>
-      <td><code>10_lienzo_charro_heatmap_competencia.geojson</code></td>
-      <td>Heatmap densidad competencia</td>
-      <td>Variable</td>
-    </tr>
-    <tr>
-      <td>12</td>
-      <td><code>12_lienzo_charro_nse_componentes.geojson</code></td>
-      <td>Componentes NSE (educación, vivienda, bienes, economía)</td>
-      <td>105</td>
-    </tr>
-  </tbody>
-</table>
+<div class="grid grid-cols-3">
+
+<div class="card">
+
+#### 📍 Sitio del Terreno
+
+```js
+html`<a href="${sitio.href}" download="01_sitio_terreno.geojson" class="download-btn" style="display:block;text-align:center;padding:0.6rem;background:#3B82F6;color:white;border-radius:6px;text-decoration:none;font-weight:500;">⬇️ Descargar</a>`
+```
+
+</div>
+
+<div class="card">
+
+#### ⭕ Buffers de Análisis
+
+```js
+html`<a href="${buffers.href}" download="02_buffers_analisis.geojson" style="display:block;text-align:center;padding:0.6rem;background:#3B82F6;color:white;border-radius:6px;text-decoration:none;font-weight:500;">⬇️ Descargar</a>`
+```
+
+</div>
+
+<div class="card">
+
+#### 🗺️ AGEBs con NSE
+
+```js
+html`<a href="${agebs.href}" download="03_agebs_nse.geojson" style="display:block;text-align:center;padding:0.6rem;background:#3B82F6;color:white;border-radius:6px;text-decoration:none;font-weight:500;">⬇️ Descargar</a>`
+```
+
+</div>
+
+<div class="card">
+
+#### 📊 Indicadores por Buffer
+
+```js
+html`<a href="${indicadores.href}" download="06_indicadores_buffer.geojson" style="display:block;text-align:center;padding:0.6rem;background:#3B82F6;color:white;border-radius:6px;text-decoration:none;font-weight:500;">⬇️ Descargar</a>`
+```
+
+</div>
+
+<div class="card">
+
+#### 🔷 Polígono del Terreno
+
+```js
+html`<a href="${poligono.href}" download="07_poligono_terreno.geojson" style="display:block;text-align:center;padding:0.6rem;background:#3B82F6;color:white;border-radius:6px;text-decoration:none;font-weight:500;">⬇️ Descargar</a>`
+```
+
+</div>
+
+<div class="card">
+
+#### 🚗 Isócronas HERE
+
+```js
+html`<a href="${isocronas.href}" download="08_isocronas_here.geojson" style="display:block;text-align:center;padding:0.6rem;background:#3B82F6;color:white;border-radius:6px;text-decoration:none;font-weight:500;">⬇️ Descargar</a>`
+```
+
+</div>
+
+<div class="card">
+
+#### 🏪 DENUE Completo
+
+```js
+html`<a href="${denue.href}" download="09_denue_completo.geojson" style="display:block;text-align:center;padding:0.6rem;background:#3B82F6;color:white;border-radius:6px;text-decoration:none;font-weight:500;">⬇️ Descargar</a>`
+```
+
+</div>
+
+<div class="card">
+
+#### 🔥 Heatmap Competencia
+
+```js
+html`<a href="${heatmap.href}" download="10_heatmap_competencia.geojson" style="display:block;text-align:center;padding:0.6rem;background:#3B82F6;color:white;border-radius:6px;text-decoration:none;font-weight:500;">⬇️ Descargar</a>`
+```
+
+</div>
+
+<div class="card">
+
+#### 📈 NSE Componentes
+
+```js
+html`<a href="${nse_comp.href}" download="12_nse_componentes.geojson" style="display:block;text-align:center;padding:0.6rem;background:#3B82F6;color:white;border-radius:6px;text-decoration:none;font-weight:500;">⬇️ Descargar</a>`
+```
+
+</div>
+
+</div>
 
 ---
 
 ## 🗺️ Cómo Usar en QGIS
 
+<div class="grid grid-cols-2">
+
+<div class="card">
+
 ### 1. Cargar Capas
 
-```bash
-# Abrir QGIS 3.28 o superior
-# Layer > Add Layer > Add Vector Layer
-# Navegar a: data/qgis_layers_paragon/lienzo_charro/
-# Seleccionar archivos .geojson
-```
+1. Abrir **QGIS 3.28** o superior
+2. Ir a **Layer → Add Layer → Add Vector Layer**
+3. Seleccionar los archivos `.geojson` descargados
+4. Las capas se cargarán con geometrías y atributos
 
-### 2. Aplicar Estilos
+</div>
 
-```bash
-# Doble clic en la capa
-# Ir a: Symbology > Style > Load Style
-# Seleccionar archivo .qml correspondiente
-```
+<div class="card">
 
-### 3. Orden Recomendado de Capas (de abajo hacia arriba)
+### 2. Orden Recomendado
 
-1. `08_isocronas_here` - Isócronas (fondo con transparencia)
-2. `02_buffers_analisis` - Buffers de análisis
-3. `03_agebs_nse` - Coropleta NSE
-4. `10_heatmap_competencia` - Heatmap de competencia
-5. `09_denue_completo` - Todos los establecimientos DENUE
-6. `07_poligono_terreno` - Polígono del predio
-7. `01_sitio_terreno` - Punto del sitio (arriba)
+De abajo hacia arriba en el panel de capas:
+
+1. 🚗 Isócronas (fondo)
+2. ⭕ Buffers de análisis
+3. 🗺️ AGEBs NSE (coropleta)
+4. 🔥 Heatmap competencia
+5. 🏪 DENUE establecimientos
+6. 🔷 Polígono del terreno
+7. 📍 Punto del sitio (arriba)
+
+</div>
+
+</div>
 
 ---
 
@@ -181,33 +224,11 @@ Documentación técnica, capas GeoJSON, metodología y comandos de regeneración
 
 ---
 
-## 🔄 Comandos de Regeneración
+## 🔄 Regeneración de Datos
 
-### Regenerar Capas QGIS
-
-```bash
-# Para proyecto específico
-python scripts/paragon_qgis_all_layers.py --project lienzo_charro
-
-# Para todos los proyectos Paragon
-python scripts/paragon_qgis_all_layers.py --all
-
-# Incluir isócronas (si disponibles)
-python scripts/paragon_qgis_all_layers.py --project lienzo_charro --include-isochrones
-```
-
-### Regenerar Mapas de Alta Calidad
-
-```bash
-# Mapas PNG 300 DPI para presentación
-python scripts/paragon_qgis_map_images.py --project lienzo_charro --dpi 300
-
-# Mapas de alta resolución para pósters
-python scripts/paragon_qgis_map_images.py --project lienzo_charro --dpi 600
-
-# Todos los proyectos
-python scripts/paragon_qgis_map_images.py --all --dpi 300
-```
+<div class="note">
+<strong>Para desarrolladores:</strong> Los datos pueden regenerarse ejecutando los pipelines de STRTGY Geointelligence. Contactar al equipo técnico para instrucciones específicas.
+</div>
 
 ---
 

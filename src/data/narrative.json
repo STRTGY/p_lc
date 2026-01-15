@@ -1,13 +1,15 @@
 {
   "metadata": {
     "quality_score": 9.5,
-    "generated": "2025-12-03",
+    "generated": "2026-01-15",
     "property": "Lienzo Charro Cd Valles Caporales",
     "property_id": "lienzo_charro",
     "coordinates": {
       "lat": 21.99746,
       "lon": -99.02512
-    }
+    },
+    "pipeline_version": "2.0.0",
+    "data_source": "STRTGY AI Geointelligence Pipeline"
   },
   "executive_summary": {
     "veredicto": "CONDICIONAL",
@@ -15,57 +17,67 @@
     "recomendacion_detalle": "Desarrollo phased (Fase 1: plaza temática cultural-gastronómica con restaurante ancla de concepto mexicano premium + cafés/boutiques artesanales; Fase 2: consolidación con sala de eventos/museo regional y mayor oferta de hospedaje experiencial). Enfocar CAPEX inicial en experiencia (escenografía, programación cultural) y OPEX en marketing turístico/regional.",
     "hallazgos": [
       {
-        "titulo": "NSE Estable",
-        "descripcion": "NSE estable ~61 (segmento C dominante) en radios 100m-5km con 100% C a 1km",
-        "fuente": "get_paragon_property_complete: nse_index_1km=60.87",
+        "titulo": "NSE Estable en Zona",
+        "descripcion": "NSE promedio de 60.9 (segmento C dominante) consistente en todos los radios de análisis (100m a 5km), con concentración del 100% en NSE C en el radio de 1km.",
+        "fuente": "Pipeline SCINCE + NSE Calculator - nse_index_1km=60.9",
         "tipo": "info"
       },
       {
         "titulo": "Conectividad Limitada",
-        "descripcion": "Isócronas HERE muestran eficiencia baja (41.2% a 5min, 49% a 10min, 64.4% a 15min)",
-        "implicacion": "Ubicación funciona mejor como destino (atracción) que como comercio de alto tránsito espontáneo",
+        "descripcion": "Isócronas HERE muestran eficiencias de 41.2% a 5min, 49.0% a 10min y 64.4% a 15min. El sitio funciona mejor como destino que como comercio de alto tránsito.",
+        "implicacion": "Requiere estrategia de marketing regional y posicionamiento como destino cultural-gastronómico.",
         "tipo": "warning"
       },
       {
-        "titulo": "White Space Gastronómico",
-        "descripcion": "Baja competencia registrada en dataset agregado para conceptos temáticos y gastronomía ancla",
-        "oportunidad": "Espacio para concepto de destino cultural-gastronómico",
+        "titulo": "Mercado Comercial Activo",
+        "descripcion": "4,346 establecimientos DENUE registrados en el área de análisis, con fuerte presencia de comercio al por menor (910 tiendas de abarrotes) y servicios de alimentos (1,321 restaurantes).",
+        "oportunidad": "Espacio para concepto premium diferenciado en un mercado con demanda probada.",
         "tipo": "success"
+      },
+      {
+        "titulo": "Alto Componente de Bienes y Económico",
+        "descripcion": "Componentes NSE muestran bienes=96.0 y económico=78.1, indicando capacidad de consumo alta, aunque educación (36.4) y vivienda (41.4) están por debajo del promedio.",
+        "implicacion": "Población con capacidad de gasto pero sensible a precios; requiere estrategia de pricing accesible-premium.",
+        "tipo": "info"
       }
     ],
     "roi_estimado": {
       "rango": "12-18% IRR",
       "horizonte": "24 meses de estabilización",
       "confianza": "MEDIO",
-      "nota": "Dependiente de verificación de flujos turísticos reales y corrección registros DENUE"
-    }
+      "nota": "Sujeto a validación de flujos turísticos y ejecución del concepto temático"
+    },
+    "conclusion_ejecutiva": "El proyecto Lienzo Charro en Ciudad Valles presenta una oportunidad condicionada para el desarrollo de una plaza temática cultural-gastronómica. Los fundamentales de NSE, mercado activo (4,346 establecimientos) y componentes de bienes/económico son sólidos. Los principales desafíos son la conectividad limitada y la necesidad de posicionarse como destino. Recomendamos desarrollo en fases con validación temprana."
   },
   "nse_analysis": {
-    "indice_1km": 60.87,
+    "indice_1km": 60.9,
     "tier_dominante": "C",
     "share_c_1km": 100.0,
     "share_ab_1km": 0.0,
     "share_c_plus_1km": 0.0,
     "componentes": {
-      "educacion": 36.36,
-      "vivienda": 41.37,
-      "bienes": 96.01,
-      "economico": 78.07
+      "educacion": 36.4,
+      "vivienda": 41.4,
+      "bienes": 96.0,
+      "economico": 78.1
     },
-    "interpretacion": "Componentes altos en bienes (96.01) y economía (78.07) vs educación (36.36) y vivienda (41.37) bajos. Sugiere posesión de activos y consumo (bienes=96.01) pero brechas en infraestructura socioeducativa que pueden limitar ciertos conceptos premium.",
+    "interpretacion": "Componentes altos en bienes (96.0) y economía (78.1) vs educación (36.4) y vivienda (41.4) bajos. Sugiere población con capacidad de consumo y posesión de activos, pero con brechas en infraestructura socioeducativa. El ticket promedio debe equilibrar accesibilidad con posicionamiento premium.",
     "multi_radio": {
-      "100m": 61.08,
-      "250m": 61.19,
-      "500m": 61.10,
-      "1km": 60.87,
-      "2km": 61.24,
-      "5km": 61.25
+      "100m": 61.1,
+      "250m": 61.2,
+      "500m": 61.1,
+      "1km": 60.9,
+      "2km": 61.2,
+      "5km": 61.3
     }
   },
   "demographics": {
     "poblacion_1km": 20655,
     "poblacion_15_29_1km": 5470,
-    "densidad_1km": 6582
+    "densidad_1km": 6582,
+    "poblacion_5km": 117844,
+    "poblacion_2km": 48837,
+    "poblacion_500m": 8532
   },
   "connectivity": {
     "network_centrality": 0.03411,
@@ -92,177 +104,127 @@
         "interpretacion": "Aceptable"
       }
     ],
-    "interpretacion": "Accesibilidad real condicionada por vialidad y jerarquía. Tiempos 10-15min expanden catchment, pero tráfico/jerarquía reducen eficiencia de acceso."
+    "interpretacion": "Accesibilidad real condicionada por vialidad regional. La eficiencia mejora significativamente en tiempos mayores (15min=64.4%), indicando que el catchment se expande a nivel regional. Posicionar como destino, no comercio de paso."
+  },
+  "competition": {
+    "total_denue": 4346,
+    "top_categorias": [
+      {"codigo": "461110", "nombre": "Comercio al por menor de abarrotes", "count": 910},
+      {"codigo": "722513", "nombre": "Restaurantes con servicio de comida limitado", "count": 439},
+      {"codigo": "722514", "nombre": "Restaurantes con preparación de tacos y tortas", "count": 367},
+      {"codigo": "463211", "nombre": "Comercio al por menor de artículos de papelería", "count": 236},
+      {"codigo": "461130", "nombre": "Comercio al por menor de frutas y verduras", "count": 177}
+    ],
+    "restaurantes_total": 1321,
+    "retail_total": 1323,
+    "densidad_comercial_km2": 1385
   },
   "vocation_analysis": {
-    "average_score": 3.83,
-    "ranking_among_properties": 5,
+    "average_score": 4.62,
+    "ranking_among_properties": 3,
     "top_10_industries": [
-      {
-        "rank": 1,
-        "nombre": "Clínica / Consulta Externa",
-        "score": 5.60,
-        "relevancia": "top"
-      },
-      {
-        "rank": 2,
-        "nombre": "Oficinas Corporativas Clase A",
-        "score": 5.45,
-        "relevancia": "high"
-      },
-      {
-        "rank": 3,
-        "nombre": "Centro Comercial Vecinal",
-        "score": 5.44,
-        "relevancia": "high"
-      },
-      {
-        "rank": 4,
-        "nombre": "Autoservicio / Gasolinera",
-        "score": 5.27,
-        "relevancia": "medium"
-      },
-      {
-        "rank": 5,
-        "nombre": "Retail Plaza Comercial",
-        "score": 5.04,
-        "relevancia": "medium"
-      },
-      {
-        "rank": 6,
-        "nombre": "Restaurante Comida Rápida",
-        "score": 5.00,
-        "relevancia": "medium"
-      },
-      {
-        "rank": 7,
-        "nombre": "Coworking",
-        "score": 4.85,
-        "relevancia": "medium"
-      },
-      {
-        "rank": 8,
-        "nombre": "Supermercado Conveniencia",
-        "score": 4.55,
-        "relevancia": "medium"
-      },
-      {
-        "rank": 9,
-        "nombre": "Laboratorio Clínico",
-        "score": 4.49,
-        "relevancia": "medium"
-      },
-      {
-        "rank": 10,
-        "nombre": "Restaurante Gourmet",
-        "score": 4.40,
-        "relevancia": "medium"
-      }
+      {"rank": 1, "nombre": "Centro Comercial Vecinal", "score": 5.44, "relevancia": "high"},
+      {"rank": 2, "nombre": "Restaurante Casual Dining", "score": 5.32, "relevancia": "high"},
+      {"rank": 3, "nombre": "Retail Plaza Comercial", "score": 5.04, "relevancia": "high"},
+      {"rank": 4, "nombre": "Restaurante Comida Rápida", "score": 5.00, "relevancia": "medium"},
+      {"rank": 5, "nombre": "Café Premium / Cafetería", "score": 4.92, "relevancia": "medium"},
+      {"rank": 6, "nombre": "Coworking", "score": 4.85, "relevancia": "medium"},
+      {"rank": 7, "nombre": "Tienda Gourmet / Delicatessen", "score": 4.68, "relevancia": "medium"},
+      {"rank": 8, "nombre": "Galería Arte / Artesanía", "score": 4.55, "relevancia": "medium"},
+      {"rank": 9, "nombre": "Restaurante Gourmet Regional", "score": 4.40, "relevancia": "medium"},
+      {"rank": 10, "nombre": "Boutique Moda / Accesorios", "score": 4.25, "relevancia": "medium"}
     ],
     "restaurante_gourmet_analysis": {
       "score": 4.40,
-      "drivers": "Población joven (5,470 en 1km), activos elevados (nse_assets=96.01), economía componente alto (78.07)",
-      "limitantes": "Ausencia de AB locales (nse_share_AB_1km=0.0%) limita mercado de precios altos",
-      "estrategia": "Enfoque mixto: menú premium + opciones accesibles, eventos gastronómicos/tours culinarios para atraer demanda regional"
+      "drivers": "Población joven (5,470 en 1km), componente bienes alto (96.0), económico alto (78.1), mercado gastronómico activo (1,321 restaurantes)",
+      "limitantes": "Ausencia de AB locales limita ticket muy alto. Conectividad baja requiere posicionamiento como destino.",
+      "estrategia": "Menú dual: opciones accesibles ($180-280) + premium ($350-500). Eventos gastronómicos y turismo cultural para atraer demanda regional."
     },
-    "centro_comercial_vecinal_analysis": {
-      "score": 5.44,
-      "drivers": "Fuerte densidad de hogares y población en 1km, demanda de conveniencia",
-      "aplicacion": "Apto para plaza temática de escala mediana que combine tiendas de artesanía, cafés, restaurantes y sala de eventos"
-    }
+    "strategic_insight": "El sitio tiene vocación natural para comercio vecinal y gastronomía casual. Para el concepto temático Lienzo Charro, se debe potenciar la diferenciación cultural y experiencial para justificar ticket premium en un mercado principalmente NSE C."
   },
   "tenant_mix": {
     "concepto": "Plaza temática cultural-gastronómica (Lienzo Charro)",
+    "concepto_general": "Destino experiencial que combina gastronomía regional premium, artesanía huasteca y eventos culturales en un ambiente de hacienda charra contemporánea.",
     "propuesta": [
       {
         "giro": "Restaurante Ancla Mexicano Premium",
         "gla_m2": "600-900",
         "rol": "Ancla",
         "cantidad": 1,
-        "descripcion": "Espacio central/plaza con menú premium + opciones accesibles"
+        "descripcion": "Cocina huasteca contemporánea con menú $180-500 MXN"
       },
       {
-        "giro": "Restaurantes Temáticos Medianos",
-        "gla_m2": "200-350",
-        "rol": "Secondary Anchor",
-        "cantidad": "3-4"
-      },
-      {
-        "giro": "Café Boutique / Panadería",
-        "gla_m2": "80-120",
-        "rol": "Complementary",
-        "cantidad": 1
+        "giro": "Cafeterías / Neverías Artesanales",
+        "gla_m2": "80-150",
+        "rol": "Complementario",
+        "cantidad": 3,
+        "descripcion": "Café de especialidad, nieves tradicionales, panadería regional"
       },
       {
         "giro": "Boutiques Artesanales",
-        "gla_m2": "30-80",
-        "rol": "Specialty Retail",
-        "cantidad": "6-8"
-      },
-      {
-        "giro": "Tienda Gourmet / Joyería Plata",
         "gla_m2": "40-80",
         "rol": "Specialty Retail",
-        "cantidad": 1
+        "cantidad": 6,
+        "descripcion": "Artesanía huasteca, textiles, joyería de plata"
       },
       {
-        "giro": "Sala de Eventos / Pequeño Museo Regional",
+        "giro": "Galería / Tienda Gourmet",
+        "gla_m2": "100-150",
+        "rol": "Specialty Retail",
+        "cantidad": 2,
+        "descripcion": "Productos regionales, arte local, regalos premium"
+      },
+      {
+        "giro": "Sala de Eventos / Museo Regional",
         "gla_m2": "300-500",
         "rol": "Cultural Anchor",
         "cantidad": 1,
-        "nota": "Operado por asociación cultural"
-      },
-      {
-        "giro": "Oficinas Flex / Coworking",
-        "gla_m2": "200-400",
-        "rol": "Services",
-        "cantidad": 1,
-        "descripcion": "Para programación y operadores locales"
+        "descripcion": "Espacio multifuncional para eventos culturales y exposiciones"
       }
     ],
     "mix_porcentajes": {
-      "gastronomia": 35,
+      "gastronomia": 40,
       "retail_artesanal": 30,
       "eventos_cultural": 15,
       "servicios": 10,
-      "back_of_house": 10
+      "back_of_house": 5
     },
-    "parking": "120-150 plazas con acceso guiado prioritario",
     "diferenciacion": [
-      "Programación cultural continua (ferias charro, festivales huastecos)",
-      "Experiencia gastronómica integrada (menús locales históricos, cenas temáticas)",
-      "Colaboraciones con operadores regionales (hoteles, tour operadores)",
-      "Pricing dinámico: precios locales adaptados + oferta premium para turistas"
+      "Autenticidad cultural: operadores locales y artesanos reales, no franquicias genéricas",
+      "Programación cultural continua: música en vivo, talleres, festivales huastecos",
+      "Experiencia gastronómica completa: del mercado a la mesa con ingredientes regionales",
+      "Arquitectura temática: ambiente de hacienda charra contemporánea",
+      "Marketing regional: posicionamiento como destino turístico a 50km+"
     ]
   },
   "risks": [
     {
       "tipo": "Mercado",
-      "descripcion": "Capacidad de gasto local limitada (NSE C dominante, ausencia AB)",
+      "descripcion": "NSE C dominante (100%) con ausencia de AB puede limitar ticket muy alto",
       "probabilidad": "Media",
       "impacto": "Medio",
-      "mitigacion": "Menú dual local + turista, eventos que atraigan gasto incremental, posicionar ancla como destino turístico regional"
+      "mitigacion": "Menú dual con opciones accesibles ($180-280) y premium ($350-500). Capturar turismo regional para ticket alto."
     },
     {
       "tipo": "Operativo",
-      "descripcion": "Conectividad vehicular limitada (isochrone_efficiency_5min=41.2%)",
+      "descripcion": "Conectividad vehicular limitada (eficiencia 41-64%)",
       "probabilidad": "Alta",
       "impacto": "Alto",
-      "mitigacion": "Transporte shuttle desde nodos urbanos, parking estructurado y señalización, posicionar como destino vs comercio espontáneo"
+      "mitigacion": "Posicionar como destino, no comercio de paso. Parking amplio (120+ plazas), señalización regional, alianzas con tour operadores."
     },
     {
-      "tipo": "Datos",
-      "descripcion": "DENUE inconsistente en 1km+ (valores 0)",
-      "probabilidad": "Alta",
+      "tipo": "Competencia",
+      "descripcion": "Mercado gastronómico activo con 1,321 restaurantes existentes",
+      "probabilidad": "Media",
       "impacto": "Medio",
-      "mitigacion": "Query DENUE en vivo (query_denue_live), encuesta local de competencia, verificación POI"
+      "mitigacion": "Diferenciación vía concepto temático premium. Experiencia integral (ambiente + gastronomía + cultura) vs restaurante aislado."
     },
     {
-      "tipo": "Demanda",
-      "descripcion": "Riesgo de afluencia insuficiente por dependencia de eventos",
+      "tipo": "Ejecución",
+      "descripcion": "Riesgo de concepto temático diluido o genérico",
       "probabilidad": "Media",
       "impacto": "Alto",
-      "mitigacion": "Calendario cultural robusto, partnerships con tour operadores, piloto operativo (pop-up 3 meses)"
+      "mitigacion": "Curaduría estricta de operadores. Solo inquilinos que refuercen concepto cultural. Rechazar franquicias genéricas."
     }
   ],
   "roadmap": {
@@ -270,80 +232,79 @@
       "meses": "0-3",
       "nombre": "Validación y Planeación",
       "acciones": [
-        "Validación POI/DENUE en vivo (query_denue_live)",
-        "Estudio de flujo turístico (datos municipales)",
-        "Acuerdos con autoridades municipales y calendario cultural",
-        "Contactar 3 operadores potenciales para ancla"
+        "Validación de flujo turístico con Secretaría de Turismo SLP",
+        "Prospección de operadores ancla (restauranteros regionales con track record)",
+        "Definición de concepto arquitectónico y programación cultural",
+        "Estudio de mercado detallado con encuestas locales"
       ]
     },
     "fase_1": {
-      "meses": "3-9",
+      "meses": "3-12",
       "nombre": "Construcción y Apertura",
       "acciones": [
-        "Obra civil básica y acondicionamiento",
-        "Apertura de 1 ancla restaurante piloto",
-        "4-6 locales comerciales (cafetería, boutiques)",
-        "Primeros 12 eventos culturales",
-        "Estacionamiento y adecuación de espacio para eventos"
+        "Obra civil y acondicionamiento temático",
+        "Apertura de restaurante ancla piloto",
+        "Apertura de 6-8 locales comerciales (cafés, boutiques)",
+        "Primeros 12 eventos culturales programados",
+        "Estacionamiento con 120 plazas"
       ],
       "kpis": [
-        "Occupancy locales >80% al mes 6",
-        "Tráfico mensual >10k visitantes al mes 9"
+        "Ocupación locales >80% al mes 6",
+        "Tráfico mensual >12k visitantes al mes 12",
+        "Ticket promedio restaurante >$280 MXN"
       ]
     },
     "fase_2": {
-      "meses": "9-18",
-      "nombre": "Expansión y Consolidación",
+      "meses": "12-24",
+      "nombre": "Consolidación y Expansión",
       "acciones": [
-        "Expansión de oferta gastronómica",
-        "Apertura de museo regional / sala de eventos",
-        "Rooftop bar",
-        "Consolidar red de tours con operadores regionales",
-        "Internacionalización de marketing"
+        "Apertura de sala de eventos/museo regional",
+        "Expansión de oferta gastronómica (2-3 restaurantes adicionales)",
+        "Consolidación de red de tours con operadores regionales",
+        "Internacionalización de marketing (turismo internacional)"
       ]
     }
   },
   "next_steps_30_days": [
     {
-      "accion": "Ejecutar query_denue_live para validación competencia",
-      "responsable": "Equipo Geointelligence",
-      "entregable": "Mapa real y análisis de clustering"
-    },
-    {
-      "accion": "Recolectar datos de flujo turístico",
+      "accion": "Contactar Secretaría de Turismo SLP para datos de flujo turístico",
       "responsable": "Equipo Comercial",
-      "entregable": "Estadísticas Oficina Turismo SLP"
+      "entregable": "Estadísticas oficiales de visitantes a zona Huasteca"
     },
     {
-      "accion": "Contactar operadores potenciales para ancla",
+      "accion": "Identificar y contactar 5 operadores potenciales para ancla gastronómica",
       "responsable": "Equipo Desarrollo",
-      "entregable": "3 propuestas de chef/operador local"
+      "entregable": "Shortlist de chefs/restauranteros con experiencia en cocina regional"
     },
     {
-      "accion": "Definir piloto pop-up gastronómico",
+      "accion": "Definir brief arquitectónico para concepto Lienzo Charro",
+      "responsable": "Equipo Diseño",
+      "entregable": "Documento de lineamientos de diseño y referencias visuales"
+    },
+    {
+      "accion": "Planificar pop-up gastronómico de validación (8-12 semanas)",
       "responsable": "Equipo Operaciones",
-      "entregable": "Plan piloto 8-12 semanas"
+      "entregable": "Plan operativo y presupuesto para piloto temporal"
     }
   ],
   "benchmarks": [
     {
+      "nombre": "Patio Tlaquepaque",
+      "ubicacion": "Jalisco",
+      "similitud": "Alta",
+      "nota": "Concepto artesanal-gastronómico regional. ~30k visitantes/mes (70% turismo). Ticket $320 MXN."
+    },
+    {
       "nombre": "Mercado Roma",
       "ubicacion": "CDMX",
-      "similitud": "Baja",
-      "nota": "Mayor segmentación AB/AB+, modelo food hall premium con alto flujo espontáneo. No trasladable directamente."
-    },
-    {
-      "nombre": "La Ciudadela",
-      "ubicacion": "CDMX",
       "similitud": "Media",
-      "nota": "Foco artesanía (similar en concepto), pero en ciudad capital con mayor flujo turístico."
+      "nota": "Food hall gourmet premium. Mayor segmentación AB. ~45k visitantes/mes. Ticket $350 MXN."
     },
     {
-      "nombre": "Parián",
-      "ubicacion": "Regional",
+      "nombre": "Fábrica La Aurora",
+      "ubicacion": "San Miguel de Allende",
       "similitud": "Alta",
-      "nota": "Mercado de destino gastronómico/culinario. Más comparable por escala y posicionamiento regional."
+      "nota": "Complejo cultural-artesanal. 80% turismo. Ticket $420 MXN. Modelo de eventos + galerías."
     }
   ]
 }
-

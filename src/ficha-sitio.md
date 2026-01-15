@@ -17,39 +17,30 @@ const sitio_coords = sitio.features[0].geometry.coordinates;
 
 ## 📍 Información General
 
+```js
+display(html`
 <div class="grid grid-cols-2">
 
 <div class="card">
-
-### Identificación del Proyecto
-
-**Nombre:** ${narrative.metadata.property}
-
-**ID Proyecto:** `${narrative.metadata.property_id}`
-
-**Ciudad:** Ciudad Valles, San Luis Potosí
-
-**Fecha de Análisis:** ${narrative.metadata.generated}
-
-**Quality Score:** ${narrative.metadata.quality_score} / 10
-
+  <h3>Identificación del Proyecto</h3>
+  <p><strong>Nombre:</strong> ${narrative.metadata.property}</p>
+  <p><strong>ID Proyecto:</strong> <code>${narrative.metadata.property_id}</code></p>
+  <p><strong>Ciudad:</strong> Ciudad Valles, San Luis Potosí</p>
+  <p><strong>Fecha de Análisis:</strong> ${narrative.metadata.generated}</p>
+  <p><strong>Quality Score:</strong> ${narrative.metadata.quality_score} / 10</p>
 </div>
 
 <div class="card">
-
-### Coordenadas del Sitio
-
-**Latitud:** ${narrative.metadata.coordinates.lat}
-
-**Longitud:** ${narrative.metadata.coordinates.lon}
-
-**Sistema de Referencia:** WGS84 (EPSG:4326)
-
-**Altitud aprox:** ~55 msnm
-
+  <h3>Coordenadas del Sitio</h3>
+  <p><strong>Latitud:</strong> ${narrative.metadata.coordinates.lat}</p>
+  <p><strong>Longitud:</strong> ${narrative.metadata.coordinates.lon}</p>
+  <p><strong>Sistema de Referencia:</strong> WGS84 (EPSG:4326)</p>
+  <p><strong>Altitud aprox:</strong> ~55 msnm</p>
 </div>
 
 </div>
+`);
+```
 
 ---
 
@@ -124,7 +115,7 @@ display(MetricCard({
 ```
 
 <div class="note">
-**🎯 Ubicación:** El punto rojo marca la ubicación exacta del sitio. Los círculos punteados azules representan los radios de análisis (100m, 250m, 500m, 1km, 2km, 5km). ${poligono && poligono.features.length > 0 ? "El polígono rojo semi-transparente muestra el área del terreno." : ""}
+<strong>🎯 Ubicación:</strong> El punto rojo marca la ubicación exacta del sitio. Los círculos punteados azules representan los radios de análisis (100m, 250m, 500m, 1km, 2km, 5km). ${poligono && poligono.features.length > 0 ? "El polígono rojo semi-transparente muestra el área del terreno." : ""}
 </div>
 
 ---
@@ -179,76 +170,67 @@ display(MetricCard({
 
 ## 📊 Perfil Socioeconómico del Área Inmediata
 
+```js
+display(html`
 <div class="grid grid-cols-3">
 
 <div class="card">
-
-### Población
-
-**Total 1km:** ${narrative.demographics.poblacion_1km.toLocaleString()}
-
-**Jóvenes (15-29):** ${narrative.demographics.poblacion_15_29_1km.toLocaleString()}
-(${Math.round((narrative.demographics.poblacion_15_29_1km / narrative.demographics.poblacion_1km) * 100)}%)
-
-**Densidad:** ${narrative.demographics.densidad_1km.toLocaleString()} hab/km²
-
+  <h3>Población</h3>
+  <p><strong>Total 1km:</strong> ${narrative.demographics.poblacion_1km.toLocaleString()}</p>
+  <p><strong>Jóvenes (15-29):</strong> ${narrative.demographics.poblacion_15_29_1km.toLocaleString()}
+  (${Math.round((narrative.demographics.poblacion_15_29_1km / narrative.demographics.poblacion_1km) * 100)}%)</p>
+  <p><strong>Densidad:</strong> ${narrative.demographics.densidad_1km.toLocaleString()} hab/km²</p>
 </div>
 
 <div class="card">
-
-### Nivel Socioeconómico
-
-**Índice NSE:** ${narrative.nse_analysis.indice_1km.toFixed(1)}
-
-**Tier Dominante:** ${narrative.nse_analysis.tier_dominante}
-
-**Share C:** ${narrative.nse_analysis.share_c_1km.toFixed(0)}%
-
-**Share AB:** ${narrative.nse_analysis.share_ab_1km.toFixed(0)}%
-
+  <h3>Nivel Socioeconómico</h3>
+  <p><strong>Índice NSE:</strong> ${narrative.nse_analysis.indice_1km.toFixed(1)}</p>
+  <p><strong>Tier Dominante:</strong> ${narrative.nse_analysis.tier_dominante}</p>
+  <p><strong>Share C:</strong> ${narrative.nse_analysis.share_c_1km.toFixed(0)}%</p>
+  <p><strong>Share AB:</strong> ${narrative.nse_analysis.share_ab_1km.toFixed(0)}%</p>
 </div>
 
 <div class="card">
-
-### Accesibilidad
-
-**5 min:** ${narrative.connectivity.isochrones[0].area_km2.toFixed(1)} km²
-
-**10 min:** ${narrative.connectivity.isochrones[1].area_km2.toFixed(1)} km²
-
-**15 min:** ${narrative.connectivity.isochrones[2].area_km2.toFixed(1)} km²
-
-**Eficiencia:** ${narrative.connectivity.isochrones[2].interpretacion}
-
+  <h3>Accesibilidad</h3>
+  <p><strong>5 min:</strong> ${narrative.connectivity.isochrones[0].area_km2.toFixed(1)} km²</p>
+  <p><strong>10 min:</strong> ${narrative.connectivity.isochrones[1].area_km2.toFixed(1)} km²</p>
+  <p><strong>15 min:</strong> ${narrative.connectivity.isochrones[2].area_km2.toFixed(1)} km²</p>
+  <p><strong>Eficiencia:</strong> ${narrative.connectivity.isochrones[2].interpretacion}</p>
 </div>
 
 </div>
+`);
+```
 
 ---
 
 ## 🎯 Posicionamiento Estratégico
 
+```js
+display(html`
 <div class="card">
-
-### Concepto Recomendado
-
-**Tipo:** ${narrative.tenant_mix.concepto}
-
-**Posicionamiento:** Plaza de destino cultural-gastronómico con enfoque experiencial
-
-**Perfil de Cliente:**
-- Local NSE C+ con capacidad de gasto en experiencias
-- Turismo regional (Huasteca Potosina)
-- Población joven (26% entre 15-29 años)
-- Eventos y celebraciones especiales
-
-**Ventajas Competitivas:**
-1. **White Space Cultural:** Baja competencia en conceptos temáticos de alta calidad
-2. **Demanda Latente:** Población joven con capacidad adquisitiva (bienes=96, económico=78)
-3. **Turismo Regional:** Flujo de visitantes Huasteca Potosina
-4. **Concepto Diferenciado:** Lienzo Charro único en la región
-
+  <h3>Concepto Recomendado</h3>
+  <p><strong>Tipo:</strong> ${narrative.tenant_mix.concepto}</p>
+  <p><strong>Posicionamiento:</strong> Plaza de destino cultural-gastronómico con enfoque experiencial</p>
+  
+  <p><strong>Perfil de Cliente:</strong></p>
+  <ul>
+    <li>Local NSE C+ con capacidad de gasto en experiencias</li>
+    <li>Turismo regional (Huasteca Potosina)</li>
+    <li>Población joven (26% entre 15-29 años)</li>
+    <li>Eventos y celebraciones especiales</li>
+  </ul>
+  
+  <p><strong>Ventajas Competitivas:</strong></p>
+  <ol>
+    <li><strong>White Space Cultural:</strong> Baja competencia en conceptos temáticos de alta calidad</li>
+    <li><strong>Demanda Latente:</strong> Población joven con capacidad adquisitiva (bienes=96, económico=78)</li>
+    <li><strong>Turismo Regional:</strong> Flujo de visitantes Huasteca Potosina</li>
+    <li><strong>Concepto Diferenciado:</strong> Lienzo Charro único en la región</li>
+  </ol>
 </div>
+`);
+```
 
 ---
 

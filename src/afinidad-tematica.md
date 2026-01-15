@@ -19,26 +19,31 @@ const buffers = await FileAttachment("./data/layers/02_lienzo_charro_buffers_ana
 const denue_procesado = processDENUEAgrupado(denue_json);
 
 // Filtrar por categorías afines al concepto Lienzo Charro
+// Nota: nom_estab = nombre del establecimiento, nombre_act = descripción SCIAN
 const boutiques = denue_json.features.filter(e => 
   e.properties.codigo_act?.startsWith('46') && 
-  (e.properties.nombre_act?.toLowerCase().includes('ropa') || 
-   e.properties.nombre_act?.toLowerCase().includes('boutique') ||
-   e.properties.nombre_act?.toLowerCase().includes('tienda'))
+  (e.properties.nom_estab?.toLowerCase().includes('ropa') || 
+   e.properties.nom_estab?.toLowerCase().includes('boutique') ||
+   e.properties.nombre_act?.toLowerCase().includes('ropa'))
 );
 
 const artesania = denue_json.features.filter(e => 
   e.properties.codigo_act?.startsWith('454') ||
-  e.properties.nombre_act?.toLowerCase().includes('artesanía') ||
-  e.properties.nombre_act?.toLowerCase().includes('artesania') ||
-  e.properties.nombre_act?.toLowerCase().includes('galería') ||
-  e.properties.nombre_act?.toLowerCase().includes('regalo')
+  e.properties.nom_estab?.toLowerCase().includes('artesanía') ||
+  e.properties.nom_estab?.toLowerCase().includes('artesania') ||
+  e.properties.nom_estab?.toLowerCase().includes('galería') ||
+  e.properties.nom_estab?.toLowerCase().includes('galeria') ||
+  e.properties.nom_estab?.toLowerCase().includes('regalo') ||
+  e.properties.nombre_act?.toLowerCase().includes('artesanía')
 );
 
 const gastronomia_tematica = denue_json.features.filter(e => 
   e.properties.codigo_act?.startsWith('722') &&
-  (e.properties.nombre_act?.toLowerCase().includes('mexicana') ||
-   e.properties.nombre_act?.toLowerCase().includes('regional') ||
-   e.properties.nombre_act?.toLowerCase().includes('típica'))
+  (e.properties.nom_estab?.toLowerCase().includes('mexicana') ||
+   e.properties.nom_estab?.toLowerCase().includes('regional') ||
+   e.properties.nom_estab?.toLowerCase().includes('típica') ||
+   e.properties.nom_estab?.toLowerCase().includes('tipica') ||
+   e.properties.nom_estab?.toLowerCase().includes('huastec'))
 );
 
 const area_1km = 3.14; // π * 1²
@@ -116,10 +121,12 @@ display(MetricCard({
 </div>
 
 <div class="note">
-**💡 Interpretación de Afinidad:**
-- 🟢 **Alta:** < 5 establecimientos/km² - White space, alta oportunidad
-- 🟡 **Media:** 5-15 establecimientos/km² - Mercado competido, requiere diferenciación
-- 🔴 **Baja:** > 15 establecimientos/km² - Saturación, evitar o posicionar muy premium
+<strong>💡 Interpretación de Afinidad:</strong>
+<ul>
+<li>🟢 <strong>Alta:</strong> &lt; 5 establecimientos/km² - White space, alta oportunidad</li>
+<li>🟡 <strong>Media:</strong> 5-15 establecimientos/km² - Mercado competido, requiere diferenciación</li>
+<li>🔴 <strong>Baja:</strong> &gt; 15 establecimientos/km² - Saturación, evitar o posicionar muy premium</li>
+</ul>
 </div>
 
 ---
@@ -150,7 +157,7 @@ display(MetricCard({
 ```
 
 <div class="note">
-**🎨 Categorías visualizadas:** El mapa muestra únicamente establecimientos con afinidad al concepto Lienzo Charro (boutiques, artesanía, gastronomía temática). Haz clic en cualquier punto para ver detalles del establecimiento.
+<strong>🎨 Categorías visualizadas:</strong> El mapa muestra únicamente establecimientos con afinidad al concepto Lienzo Charro (boutiques, artesanía, gastronomía temática). Haz clic en cualquier punto para ver detalles del establecimiento.
 </div>
 
 ---
@@ -223,6 +230,7 @@ display(InsightCard({
   ];
   
   const table = Inputs.table(categorias, {
+    select: false,
     columns: ["categoria", "afinidad_estrellas", "densidad", "gap", "prioridad"],
     header: {
       categoria: "Categoría SCIAN",

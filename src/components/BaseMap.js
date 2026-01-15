@@ -20,7 +20,9 @@ export function BaseMap({
   width = "100%",
   height = 600,
   layers = [],
-  mapboxToken = "pk.eyJ1IjoiZmVpcG93ZXIiLCJhIjoiY21hbjd5bnQ4MG93NTJsc2Z3dzdzNnRiNiJ9.942M6p7lPTB0M2wU4p7cHg",
+  mapboxToken = typeof process !== 'undefined' && process.env?.MAPBOX_TOKEN 
+    ? process.env.MAPBOX_TOKEN 
+    : "pk.eyJ1IjoiZmVpcG93ZXIiLCJhIjoiY21hbjd5bnQ4MG93NTJsc2Z3dzdzNnRiNiJ9.942M6p7lPTB0M2wU4p7cHg", // Fallback for dev
   style = "mapbox://styles/mapbox/light-v11"
 } = {}) {
   
@@ -358,6 +360,7 @@ export const ParagonLayerPresets = {
         'Media', '#FBBF24',
         'Alta', '#F59E0B',
         'Muy Alta', '#EF4444',
+        'Muy alta', '#EF4444',  // Variante con minúscula
         '#E5E7EB' // default
       ],
       'fill-opacity': 0.5,
