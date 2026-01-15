@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "07_lienzo_charro_poligono_terreno",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Name": "Lienzo Charro Cd Valles Caporales ", "Description": "", "proyecto_id": "lienzo_charro", "source": "KMZ" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -99.024661890732105, 21.99799792819379 ], [ -99.025936846060063, 21.997450928465021 ], [ -99.025694376617182, 21.997077701596091 ], [ -99.02536162673951, 21.997004586608249 ], [ -99.024351502713785, 21.997408952864731 ], [ -99.024661890732105, 21.99799792819379 ] ] ] } }
+]
+}

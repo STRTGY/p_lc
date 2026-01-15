@@ -1,0 +1,282 @@
+
+> dev
+> observable preview
+
+Observable Framework v1.13.3
+↳ http://127.0.0.1:3001/
+
+GET /
+GET /_observablehq/theme-air.css
+GET /_observablehq/client.js
+GET /_observablehq/stdlib/inputs.css
+GET /_observablehq/stdlib.js
+GET /_import/components/InsightCard.js?sha=3268eab912a0685886351f6fa353702703f61529918ffbce213b320d9f25b384
+GET /_observablehq/runtime.js
+GET /_import/data/loaders.js?sha=c7f1527605c9a0810ae32b617f8e3d9d580d6b1c1b2e1dcbf4773dcaf27570b6
+GET /_npm/@observablehq/plot@0.6.17/_esm.js
+GET /_npm/htl@0.3.1/_esm.js
+GET /_observablehq/stdlib/inputs.js
+GET /_npm/d3@7.9.0/_esm.js
+GET /_npm/isoformat@0.2.1/_esm.js
+GET /_npm/interval-tree-1d@1.0.4/_esm.js
+GET /_npm/d3-array@3.2.4/_esm.js
+GET /_npm/d3-axis@3.0.0/_esm.js
+GET /_npm/d3-brush@3.0.0/_esm.js
+GET /_npm/d3-chord@3.0.1/_esm.js
+GET /_npm/d3-color@3.1.0/_esm.js
+GET /_npm/d3-contour@4.0.2/_esm.js
+GET /_npm/d3-delaunay@6.0.4/_esm.js
+GET /_npm/d3-dispatch@3.0.1/_esm.js
+GET /_npm/d3-drag@3.0.0/_esm.js
+GET /_npm/d3-dsv@3.0.1/_esm.js
+GET /_npm/d3-ease@3.0.1/_esm.js
+GET /_npm/d3-fetch@3.0.1/_esm.js
+GET /_npm/d3-force@3.0.0/_esm.js
+GET /_npm/d3-format@3.1.0/_esm.js
+GET /_npm/d3-geo@3.1.1/_esm.js
+GET /_npm/d3-hierarchy@3.1.2/_esm.js
+GET /_npm/d3-interpolate@3.0.1/_esm.js
+GET /_npm/d3-path@3.1.0/_esm.js
+GET /_npm/d3-polygon@3.0.1/_esm.js
+GET /_npm/d3-quadtree@3.0.1/_esm.js
+GET /_npm/d3-random@3.0.1/_esm.js
+GET /_npm/d3-scale@4.0.2/_esm.js
+GET /_npm/d3-scale-chromatic@3.1.0/_esm.js
+GET /_npm/d3-selection@3.0.0/_esm.js
+GET /_npm/d3-shape@3.2.0/_esm.js
+GET /_npm/d3-time@3.1.0/_esm.js
+GET /_npm/d3-time-format@4.1.0/_esm.js
+GET /_npm/d3-timer@3.0.1/_esm.js
+GET /_npm/d3-transition@3.0.1/_esm.js
+GET /_npm/d3-zoom@3.0.0/_esm.js
+GET /_npm/binary-search-bounds@2.0.5/_esm.js
+GET /_npm/internmap@2.0.3/_esm.js
+GET /_npm/delaunator@5.0.1/_esm.js
+GET /_npm/robust-predicates@3.0.2/_esm.js
+socket open /_observablehq
+GET /_file/data/narrative.json?sha=8e8fd15a581c11a69bdc4aeb7874d4650a922794863195e16035e3ade6c57e72
+GET /_file/observable.png?sha=1af93621c62a90e8470b360f1fbd3e26aff4fb62b9c83c1f90a14dc72aa92a31
+↑ {
+  type: 'hello',
+  path: '/',
+  hash: '78e83c8b8bdb58d584e49b814985b70152dbe7ef27450b90077e4651871dd335'
+}
+↓ { type: 'welcome' }
+↓ {
+  type: 'update',
+  html: [],
+  code: {
+    removed: [ '5d7ae1f2' ],
+    added: [
+      'define({id: "5d7ae1f2", inputs: ["FileAttachment"], outputs: ["VerdictBadge","ROIIndicator","MetricCard","InsightCard","loadIndicadoresBuffer","Plot","narrative","indicadores"], body: async (FileAttachment) => {\n' +
+        'const [{VerdictBadge, ROIIndicator, MetricCard, InsightCard}, {loadIndicadoresBuffer}, Plot] = await Promise.all([import("./_import/components/InsightCard.js?sha=3268eab912a0685886351f6fa353702703f61529918ffbce213b320d9f25b384"), import("./_import/data/loaders.js?sha=29cf9d7c9cb4f405f87caff5ba87b4b0dd1e83d3c5d445132f357fbb3a2c0e65"), import("./_npm/@observablehq/plot@0.6.17/_esm.js")]);\n' +
+        '\n' +
+        '// Cargar datos\n' +
+        'const narrative = FileAttachment("./data/narrative.json").json();\n' +
+        'const indicadores = await loadIndicadoresBuffer(FileAttachment);\n' +
+        'return {VerdictBadge,ROIIndicator,MetricCard,InsightCard,loadIndicadoresBuffer,Plot,narrative,indicadores};\n' +
+        '}});\n' +
+        ' // 267d2df61aee0b3cfec53c7cbf863964fe548f742f49bda235dc3cbb602abca3'
+    ]
+  },
+  files: { removed: [], added: [] },
+  tables: { removed: [], added: [] },
+  stylesheets: {
+    removed: [],
+    added: [
+      'https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap'
+    ]
+  },
+  hash: {
+    previous: '78e83c8b8bdb58d584e49b814985b70152dbe7ef27450b90077e4651871dd335',
+    current: '8febc0d76e4fe728e74308d82af45061608baf12cb59429af31b1ee4856b1c0a'
+  }
+}
+↓ {
+  type: 'update',
+  html: [],
+  code: {
+    removed: [ '5d7ae1f2' ],
+    added: [
+      'define({id: "5d7ae1f2", inputs: ["FileAttachment"], outputs: ["VerdictBadge","ROIIndicator","MetricCard","InsightCard","loadIndicadoresBuffer","Plot","narrative","indicadores"], body: async (FileAttachment) => {\n' +
+        'const [{VerdictBadge, ROIIndicator, MetricCard, InsightCard}, {loadIndicadoresBuffer}, Plot] = await Promise.all([import("./_import/components/InsightCard.js?sha=3268eab912a0685886351f6fa353702703f61529918ffbce213b320d9f25b384"), import("./_import/data/loaders.js?sha=68e547ef39910818dc4997e716649836a1846711fe30ca63971600bca51266ea"), import("./_npm/@observablehq/plot@0.6.17/_esm.js")]);\n' +
+        '\n' +
+        '// Cargar datos\n' +
+        'const narrative = FileAttachment("./data/narrative.json").json();\n' +
+        'const indicadores = await loadIndicadoresBuffer(FileAttachment);\n' +
+        'return {VerdictBadge,ROIIndicator,MetricCard,InsightCard,loadIndicadoresBuffer,Plot,narrative,indicadores};\n' +
+        '}});\n' +
+        ' // 267d2df61aee0b3cfec53c7cbf863964fe548f742f49bda235dc3cbb602abca3'
+    ]
+  },
+  files: { removed: [], added: [] },
+  tables: { removed: [], added: [] },
+  stylesheets: { removed: [], added: [] },
+  hash: {
+    previous: '8febc0d76e4fe728e74308d82af45061608baf12cb59429af31b1ee4856b1c0a',
+    current: 'c84d51c550d242689deb711a338950e1ea85334bbb7320e2aa1abd271714f516'
+  }
+}
+↓ {
+  type: 'update',
+  html: [],
+  code: {
+    removed: [ '5d7ae1f2' ],
+    added: [
+      'define({id: "5d7ae1f2", inputs: ["FileAttachment"], outputs: ["VerdictBadge","ROIIndicator","MetricCard","InsightCard","loadIndicadoresBuffer","Plot","narrative","indicadores"], body: async (FileAttachment) => {\n' +
+        'const [{VerdictBadge, ROIIndicator, MetricCard, InsightCard}, {loadIndicadoresBuffer}, Plot] = await Promise.all([import("./_import/components/InsightCard.js?sha=3268eab912a0685886351f6fa353702703f61529918ffbce213b320d9f25b384"), import("./_import/data/loaders.js?sha=c33214bc8d8b4bf808ea9fcd96d045dc2c7cb0e9b5dabf9d141dbb39ed37ce92"), import("./_npm/@observablehq/plot@0.6.17/_esm.js")]);\n' +
+        '\n' +
+        '// Cargar datos\n' +
+        'const narrative = FileAttachment("./data/narrative.json").json();\n' +
+        'const indicadores = await loadIndicadoresBuffer(FileAttachment);\n' +
+        'return {VerdictBadge,ROIIndicator,MetricCard,InsightCard,loadIndicadoresBuffer,Plot,narrative,indicadores};\n' +
+        '}});\n' +
+        ' // 267d2df61aee0b3cfec53c7cbf863964fe548f742f49bda235dc3cbb602abca3'
+    ]
+  },
+  files: { removed: [], added: [] },
+  tables: { removed: [], added: [] },
+  stylesheets: { removed: [], added: [] },
+  hash: {
+    previous: 'c84d51c550d242689deb711a338950e1ea85334bbb7320e2aa1abd271714f516',
+    current: '77cbcc48a21121dcfcf3ffaa93204befe6114e6d3df9add919623770b57ec0f8'
+  }
+}
+↓ {
+  type: 'update',
+  html: [],
+  code: {
+    removed: [ '5d7ae1f2' ],
+    added: [
+      'define({id: "5d7ae1f2", inputs: ["FileAttachment"], outputs: ["VerdictBadge","ROIIndicator","MetricCard","InsightCard","loadIndicadoresBuffer","Plot","narrative","indicadores"], body: async (FileAttachment) => {\n' +
+        'const [{VerdictBadge, ROIIndicator, MetricCard, InsightCard}, {loadIndicadoresBuffer}, Plot] = await Promise.all([import("./_import/components/InsightCard.js?sha=3268eab912a0685886351f6fa353702703f61529918ffbce213b320d9f25b384"), import("./_import/data/loaders.js?sha=2094e34341cb3f4fb38aff95b1e3a4794fcf535a2c907487092e90efeb9a067c"), import("./_npm/@observablehq/plot@0.6.17/_esm.js")]);\n' +
+        '\n' +
+        '// Cargar datos\n' +
+        'const narrative = FileAttachment("./data/narrative.json").json();\n' +
+        'const indicadores = await loadIndicadoresBuffer(FileAttachment);\n' +
+        'return {VerdictBadge,ROIIndicator,MetricCard,InsightCard,loadIndicadoresBuffer,Plot,narrative,indicadores};\n' +
+        '}});\n' +
+        ' // 267d2df61aee0b3cfec53c7cbf863964fe548f742f49bda235dc3cbb602abca3'
+    ]
+  },
+  files: { removed: [], added: [] },
+  tables: { removed: [], added: [] },
+  stylesheets: { removed: [], added: [] },
+  hash: {
+    previous: '77cbcc48a21121dcfcf3ffaa93204befe6114e6d3df9add919623770b57ec0f8',
+    current: 'fcc5d77b005460e321d9c67463030f6b4054882d04ebca7ecad77050262cb603'
+  }
+}
+↓ {
+  type: 'update',
+  html: [],
+  code: {
+    removed: [ '5d7ae1f2' ],
+    added: [
+      'define({id: "5d7ae1f2", inputs: ["FileAttachment"], outputs: ["VerdictBadge","ROIIndicator","MetricCard","InsightCard","loadIndicadoresBuffer","Plot","narrative","indicadores"], body: async (FileAttachment) => {\n' +
+        'const [{VerdictBadge, ROIIndicator, MetricCard, InsightCard}, {loadIndicadoresBuffer}, Plot] = await Promise.all([import("./_import/components/InsightCard.js?sha=3268eab912a0685886351f6fa353702703f61529918ffbce213b320d9f25b384"), import("./_import/data/loaders.js?sha=9e034acc148a9810b3e670d734570bbab8e5a3a7b90a1bc9e07ff1d72704731e"), import("./_npm/@observablehq/plot@0.6.17/_esm.js")]);\n' +
+        '\n' +
+        '// Cargar datos\n' +
+        'const narrative = FileAttachment("./data/narrative.json").json();\n' +
+        'const indicadores = await loadIndicadoresBuffer(FileAttachment);\n' +
+        'return {VerdictBadge,ROIIndicator,MetricCard,InsightCard,loadIndicadoresBuffer,Plot,narrative,indicadores};\n' +
+        '}});\n' +
+        ' // 267d2df61aee0b3cfec53c7cbf863964fe548f742f49bda235dc3cbb602abca3'
+    ]
+  },
+  files: { removed: [], added: [] },
+  tables: { removed: [], added: [] },
+  stylesheets: { removed: [], added: [] },
+  hash: {
+    previous: 'fcc5d77b005460e321d9c67463030f6b4054882d04ebca7ecad77050262cb603',
+    current: 'de2511fd4d01f6df49b79b898a3c1d926d30ef31b4662bf26f9235bac4e9a8b3'
+  }
+}
+↓ {
+  type: 'update',
+  html: [
+    { type: 'remove', oldPos: 3, newPos: 3, items: [Object] },
+    { type: 'add', oldPos: 4, newPos: 3, items: [Array] }
+  ],
+  code: {
+    removed: [ '5d7ae1f2' ],
+    added: [
+      'define({id: "907225e1", inputs: ["FileAttachment"], outputs: ["VerdictBadge","ROIIndicator","MetricCard","InsightCard","processIndicadoresBuffer","Plot","narrative","indicadores_raw","indicadores"], body: async (FileAttachment) => {\n' +
+        'const [{VerdictBadge, ROIIndicator, MetricCard, InsightCard}, {processIndicadoresBuffer}, Plot] = await Promise.all([import("./_import/components/InsightCard.js?sha=3268eab912a0685886351f6fa353702703f61529918ffbce213b320d9f25b384"), import("./_import/data/loaders.js?sha=9e034acc148a9810b3e670d734570bbab8e5a3a7b90a1bc9e07ff1d72704731e"), import("./_npm/@observablehq/plot@0.6.17/_esm.js")]);\n' +
+        '\n' +
+        '// Cargar datos\n' +
+        'const narrative = FileAttachment("./data/narrative.json").json();\n' +
+        'const indicadores_raw = FileAttachment("./data/layers/06_lienzo_charro_indicadores_buffer.geojson").json();\n' +
+        'const indicadores = processIndicadoresBuffer(indicadores_raw);\n' +
+        'return {VerdictBadge,ROIIndicator,MetricCard,InsightCard,processIndicadoresBuffer,Plot,narrative,indicadores_raw,indicadores};\n' +
+        '}});\n' +
+        ' // 2f8bb6d2636c9ed76bfd3265b1f88bc5bcd4fe1225be33c15647169d59a4375b'
+    ]
+  },
+  files: { removed: [], added: [ [Object] ] },
+  tables: { removed: [], added: [] },
+  stylesheets: { removed: [], added: [] },
+  hash: {
+    previous: 'de2511fd4d01f6df49b79b898a3c1d926d30ef31b4662bf26f9235bac4e9a8b3',
+    current: 'e8426a9eabf527f95e99e075c6bea595456618e963d43d21100769a07b9e235c'
+  }
+}
+↓ {
+  type: 'update',
+  html: [
+    { type: 'remove', oldPos: 3, newPos: 3, items: [Object] },
+    { type: 'add', oldPos: 4, newPos: 3, items: [Array] }
+  ],
+  code: {
+    removed: [ '907225e1' ],
+    added: [
+      'define({id: "53f3becd", inputs: ["FileAttachment"], outputs: ["VerdictBadge","ROIIndicator","MetricCard","InsightCard","processIndicadoresBuffer","Plot","narrative","indicadores_raw","indicadores"], body: async (FileAttachment) => {\n' +
+        'const [{VerdictBadge, ROIIndicator, MetricCard, InsightCard}, {processIndicadoresBuffer}, Plot] = await Promise.all([import("./_import/components/InsightCard.js?sha=3268eab912a0685886351f6fa353702703f61529918ffbce213b320d9f25b384"), import("./_import/data/loaders.js?sha=9e034acc148a9810b3e670d734570bbab8e5a3a7b90a1bc9e07ff1d72704731e"), import("./_npm/@observablehq/plot@0.6.17/_esm.js")]);\n' +
+        '\n' +
+        '// Cargar datos\n' +
+        'const narrative = await FileAttachment("./data/narrative.json").json();\n' +
+        'const indicadores_raw = await FileAttachment("./data/layers/06_lienzo_charro_indicadores_buffer.geojson").json();\n' +
+        'const indicadores = processIndicadoresBuffer(indicadores_raw);\n' +
+        'return {VerdictBadge,ROIIndicator,MetricCard,InsightCard,processIndicadoresBuffer,Plot,narrative,indicadores_raw,indicadores};\n' +
+        '}});\n' +
+        ' // 2f8bb6d2636c9ed76bfd3265b1f88bc5bcd4fe1225be33c15647169d59a4375b'
+    ]
+  },
+  files: { removed: [], added: [] },
+  tables: { removed: [], added: [] },
+  stylesheets: { removed: [], added: [] },
+  hash: {
+    previous: 'e8426a9eabf527f95e99e075c6bea595456618e963d43d21100769a07b9e235c',
+    current: '97da85a1c38a1a4d56d331c5c8cce044de90fd63dcd79700fe0e5221daaba724'
+  }
+}
+↓ {
+  type: 'update',
+  html: [],
+  code: {
+    removed: [ '53f3becd' ],
+    added: [
+      'define({id: "53f3becd", inputs: ["FileAttachment"], outputs: ["VerdictBadge","ROIIndicator","MetricCard","InsightCard","processIndicadoresBuffer","Plot","narrative","indicadores_raw","indicadores"], body: async (FileAttachment) => {\n' +
+        'const [{VerdictBadge, ROIIndicator, MetricCard, InsightCard}, {processIndicadoresBuffer}, Plot] = await Promise.all([import("./_import/components/InsightCard.js?sha=3268eab912a0685886351f6fa353702703f61529918ffbce213b320d9f25b384"), import("./_import/data/loaders.js?sha=9e034acc148a9810b3e670d734570bbab8e5a3a7b90a1bc9e07ff1d72704731e"), import("./_npm/@observablehq/plot@0.6.17/_esm.js")]);\n' +
+        '\n' +
+        '// Cargar datos\n' +
+        'const narrative = await FileAttachment("./data/narrative.json").json();\n' +
+        'const indicadores_raw = await FileAttachment("./data/layers/06_lienzo_charro_indicadores_buffer.geojson").json();\n' +
+        'const indicadores = processIndicadoresBuffer(indicadores_raw);\n' +
+        'return {VerdictBadge,ROIIndicator,MetricCard,InsightCard,processIndicadoresBuffer,Plot,narrative,indicadores_raw,indicadores};\n' +
+        '}});\n' +
+        ' // 3913d667b9eaeb0ab6158e5a069bff2f68d4626b6c1e7fff74c3802ec453c92b'
+    ]
+  },
+  files: { removed: [ './data/narrative.json' ], added: [ [Object] ] },
+  tables: { removed: [], added: [] },
+  stylesheets: { removed: [], added: [] },
+  hash: {
+    previous: '97da85a1c38a1a4d56d331c5c8cce044de90fd63dcd79700fe0e5221daaba724',
+    current: '320fd0250f1e9a7666ffbd51398fc7d4cfa8f2a70ca88f9f14f0f75034c51a19'
+  }
+}
+GET /_import/data/loaders.js?sha=9e034acc148a9810b3e670d734570bbab8e5a3a7b90a1bc9e07ff1d72704731e
+GET /_file/data/narrative.json?sha=cbaef41ba73420f45feac8f6c1adad1e5611b9e0d6e5fe26f65bb062de086198
+GET /_file/data/layers/06_lienzo_charro_indicadores_buffer.geojson?sha=3c595fb396329e7490f5be312315444f347174087a9399c6f0f8be162cebfa70
+socket close /_observablehq
