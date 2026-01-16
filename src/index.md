@@ -4,7 +4,7 @@ toc: false
 
 <div class="hero">
   <h1>Paragon | Lienzo Charro</h1>
-  <h2>Análisis Geoespacial de Vocación para Tenant Mix Temático</h2>
+  <h2>Análisis Geoespacial  de Vocación para Tenant Mix Temático</h2>
   <p style="font-size: 18px; color: var(--theme-foreground-muted); max-width: 40em; margin: 2rem auto;">
     Ciudad Valles, San Luis Potosí
   </p>
